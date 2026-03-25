@@ -25,13 +25,10 @@ layout: null
 
 <header>
     <a href="/" class="site-title">404 Found</a>
-    <p class="site-subtitle">Hello World</p> 
+    <p class="site-subtitle">Recently found</p> 
 </header>
-
 <main>
-    <h1>Recently found</h1>
-
-    <ul class="post-list">
+       <ul class="post-list">
         <li class="post-item">
             <div class="post-meta">2026. 03. 25</div>
             <a href="https://visacli.sh/" target="_blank" class="post-link">Visa Cli: Agentic Commerce</a>

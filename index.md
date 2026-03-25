@@ -1,7 +1,7 @@
 ---
 layout: null
 ---
-<!DOCTYPE html>
+
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -10,8 +10,8 @@ layout: null
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #111; max-width: 800px; margin: 0 auto; padding: 2rem; background: #fff; }
         header { border-bottom: 1px solid #e8e8e8; padding-bottom: 1.5rem; margin-bottom: 2rem; }
-        .site-title { font-size: 1.6rem; font-weight: 300; letter-spacing: -1px; text-decoration: none; color: #424242; }
-        h1 { font-size: 2.25rem; font-weight: 400; margin-bottom: 2rem; }
+        .site-title { font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; text-decoration: none; color: #424242; }
+        h1 { font-size: 2rem; font-weight: 400; margin-bottom: 2rem; }
         .post-list { list-style: none; padding: 0; }
         .post-item { margin-bottom: 2.5rem; }
         .post-meta { color: #828282; font-size: 0.9rem; margin-bottom: 0.2rem; }
@@ -25,6 +25,7 @@ layout: null
 
 <header>
     <a href="/" class="site-title">404 Found</a>
+    <p class="site-subtitle">Hello World</p> </header>
 </header>
 
 <main>
@@ -39,8 +40,8 @@ layout: null
 
         <li class="post-item">
             <div class="post-meta">2026. 03. 24</div>
-            <a href="https://pubmed.ncbi.nlm.nih.gov/38676308/" target="_blank" class="post-link">Neuro Marketing </a>
-            <p class="post-summary">초콜릿 브랜드 선호도에 따른 뇌의 반응(fMRI)을 연구한 논문입니다. Neural correlates of chocolate brand preference: A functional MRI study</p>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/38676308/" target="_blank" class="post-link">[Neuro Marketing] Neural correlates of chocolate brand preference: A functional MRI study </a>
+            <p class="post-summary">초콜릿 브랜드 선호도에 따른 뇌의 반응(fMRI)을 연구한 논문입니다. 연구 결과, 선호하는 브랜드 초콜릿 선택 시 뇌의 처리 부하가 낮고 주관적 보상 가치가 높게 나타났습니다. 익숙한 브랜드는 빠른 반응 속도와 특정 뇌 부위 활성화를 유도하며, 선택 행동은 갈망보다 '좋아함(liking)'에 더 큰 영향을 받습니다. 결론적으로, 뉴로마케팅 전략은 소비자의 뇌가 고민 없이 선택할 수 있도록 브랜드 친숙도를 높여 인지 부하를 낮추는 것에 집중해야 합니다.</p>
         </li>
         </ul>
 </main>

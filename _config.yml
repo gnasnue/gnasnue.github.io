@@ -1,8 +1,0 @@
-title: 404 Found
-author: gnasnue
-description: Hello World
-remote_theme: jekyll/minima
-plugins:
-  - jekyll-remote-theme
-  - jekyll-feed
-  - jekyll-seo-tag

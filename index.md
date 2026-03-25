@@ -10,8 +10,8 @@ layout: null
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #111; max-width: 800px; margin: 0 auto; padding: 2rem; background: #fff; }
         header { border-bottom: 1px solid #e8e8e8; padding-bottom: 1.5rem; margin-bottom: 2rem; }
-        .site-title { font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; text-decoration: none; color: #424242; }
-        h1 { font-size: 2rem; font-weight: 400; margin-bottom: 2rem; }
+        .site-title { font-size: 2.5rem; font-weight: 500; letter-spacing: -1px; text-decoration: none; color: #424242; line-height: 0.8; }
+        h1 { font-size: 2.5rem; font-weight: 400; margin-bottom: 2rem; }
         .post-list { list-style: none; padding: 0; }
         .post-item { margin-bottom: 2.5rem; }
         .post-meta { color: #828282; font-size: 0.9rem; margin-bottom: 0.2rem; }
@@ -25,7 +25,7 @@ layout: null
 
 <header>
     <a href="/" class="site-title">404 Found</a>
-    <p class="site-subtitle">Hello World</p> </header>
+    <p class="site-subtitle">Hello World</p> 
 </header>
 
 <main>

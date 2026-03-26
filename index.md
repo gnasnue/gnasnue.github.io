@@ -50,24 +50,8 @@ layout: null
 
         <li class="post-item">
             <div class="post-meta">2026. 03. 24</div>
-            <a href="https://pubmed.ncbi.nlm.nih.gov/38676308/" target="_blank" class="post-link">[Neuro Marketing] Neural correlates of chocolate brand preference: A functional MRI study </a>
-            <p class="post-summary">초콜릿 브랜드 선호도가 뇌에 미치는 영향을 fMRI로 분석한 결과, 소비자가 선호하는 브랜드를 선택할 때 뇌의 처리 부하는 낮아지고 주관적 보상 가치는 높아지는 것으로 나타났습니다. 특히 브랜드 선택은 단순한 '갈망(Craving)'보다 정서적 '좋아함(Liking)'에 더 큰 영향을 받으며, 익숙한 브랜드일수록 빠른 반응 속도와 특정 뇌 부위의 활성화를 유도합니다. 이를 바탕으로 도출한 뉴로마케팅 시사점은 다음과 같습니다.<br><br>
-
-1.브랜드 친숙도와 의사결정 효율성<br>
-익숙한 브랜드(FC)는 낯선 브랜드(UC)보다 인지적 처리 부하를 줄여 더 빠른 선택을 이끌어냅니다. 이는 강력한 브랜드 자산이 소비자의 의사결정 에너지를 절약해 주는 '인지적 지름길(Heuristic)'로 작용함을 입증합니다.<br><br>
-
-2.갈망(Craving)과 좋아함(Liking)의 차별화<br>
-소비자의 최종 선택은 즉각적인 욕구(Craving)보다 브랜드에 대해 축적된 정서적 즐거움과 선호도(Liking)에 의해 결정됩니다. 따라서 마케팅 전략은 단순한 시각적 자극을 넘어 브랜드와의 긍정적인 정서적 유대를 강화하는 데 집중해야 합니다.<br><br>
-
-3.뇌 보상 체계의 활성화 기제<Br>
-
-복측 전전두엽 피질(vmPFC): 익숙한 브랜드 선택 시 활성화되며, 브랜드 가치를 통합된 보상으로 인식하여 빠른 판단을 돕습니다.<br>
-
-하전두회 및 미상핵: 낯선 브랜드를 선택할 때 활성화되며, 이는 소비자에게 더 많은 인지적 노력과 선택의 갈등 해결 과정이 필요함을 의미합니다.<br><Br>
-
-결론적으로, 뉴로마케팅의 핵심은 소비자가 고민 없이 선택할 수 있도록 브랜드 친숙도를 높여 뇌의 인지 부하를 최소화하는 데 있습니다. <br><br>
-
-AI서비스기획 및 UX설계에도 다음과 같이 적용해 볼 수 있겠습니다<br>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/38676308/" target="_blank" class="post-link">[Neuro Business] Neural correlates of chocolate brand preference: A functional MRI study </a>
+            <p class="post-summary">초콜릿 브랜드 선호도가 뇌에 미치는 영향을 fMRI로 분석한 결과, 소비자가 선호하는 브랜드를 선택할 때 뇌의 처리 부하는 낮아지고 주관적 보상 가치는 높아지는 것으로 나타났습니다. 특히 브랜드 선택은 단순한 '갈망(Craving)'보다 정서적 '좋아함(Liking)'에 더 큰 영향을 받으며, 익숙한 브랜드일수록 빠른 반응 속도와 특정 뇌 부위의 활성화를 유도합니다. 이를 AI 서비스 기획 및 UX 설계에 적용하면 다음과 같은 전략을 도출할 수 있습니다.<br><br>
 1. 사용자의 인지 에너지를 아끼는 AI UX 설계<br>
 논문은 익숙한 브랜드가 뇌의 처리 부하를 낮춰 빠른 선택을 유도함을 보여줍니다. AI 분야에서도 사용자가 시스템의 작동 방식을 고민하게 만들어서는 안 됩니다.<br>
 

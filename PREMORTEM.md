@@ -1,6 +1,4 @@
 # Project Pre-mortem Analysis
-본 문서는 프로젝트가 실패했다고 가정했을 때의 가상 시나리오를 바탕으로 잠재적 리스크를 식별하고, 이를 방지하기 위한 대응 전략을 기술합니다.
-
 ---
 
 ## 1. Service & Product Risks (서비스 측면)

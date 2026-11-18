@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>에이전트 운영 | 이은상</title>
+<meta name="description" content="AI 에이전트가 코드를 쓰고 완료 판정은 CI만 내리게 설계한 개발 하네스. 세션별 쓰기 범위, 다른 회사 모델의 교차 검토, 해시로 잠근 시험, CI 단계 관문, 사람 승인 범위">
+<meta property="og:title" content="코드는 에이전트가 쓰고, 완료 판정은 CI만 내리는 개발 하네스">
+<meta property="og:description" content="세션 구성, 작업 루프, 에이전트의 실패 유형별 가드레일, 사람과 AI의 결정 권한">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23182259'/%3E%3Crect x='7' y='13' width='18' height='6' rx='3' fill='%23E85D14'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="site.css">
+<style>
+/* 이 쪽에서만 쓰는 그림과 표 모양. 글자 크기와 색은 site.css의 값을 그대로 쓴다 */
+.ops code{font-family:var(--code);font-size:.92em;color:var(--navy);background:var(--navy-soft);border-radius:5px;padding:2px 6px;white-space:nowrap}
+.diagram{margin:0 0 14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px 28px 24px;overflow-x:auto}
+.diagram svg{display:block;width:100%;height:auto;font-family:var(--sans)}
+.diagram .n-human{fill:var(--navy)}
+.diagram .n-ai{fill:var(--surface);stroke:var(--accent);stroke-width:1.5;stroke-dasharray:6 4}
+.diagram .n-rule{fill:var(--rule-soft);stroke:var(--rule);stroke-width:1.5}
+.diagram .grp{fill:var(--bg)}
+.diagram .sub{fill:var(--accent-soft)}
+.diagram .ln{stroke:var(--rule);stroke-width:1.5;fill:none}
+.diagram .ah{fill:var(--rule)}
+.diagram text{fill:var(--text);font-size:var(--fs-small)}
+.diagram .t{font-size:var(--fs-h4);font-weight:700;fill:var(--ink);letter-spacing:-.02em}
+.diagram .lb{font-size:var(--fs-label);font-weight:700;letter-spacing:.12em;fill:var(--accent)}
+.diagram .m{fill:var(--muted);font-weight:400;font-size:var(--fs-small);letter-spacing:0}
+.diagram .mono{font-family:var(--code);font-size:var(--fs-label);fill:var(--navy)}
+.diagram .w{fill:#fff}
+.diagram .w2{fill:#C9CFEA}
+.state{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:0 0 18px;padding:0;list-style:none}
+.state li{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 14px 12px;font-size:var(--fs-small);line-height:1.5;color:var(--muted)}
+.state code{display:block;white-space:normal;background:none;padding:0;margin-bottom:6px;font-size:var(--fs-label);font-weight:700;overflow-wrap:anywhere}
+.legend i{font-style:normal}
+.ops h3.cap{font-size:var(--fs-label);font-weight:700;letter-spacing:.12em;color:var(--faint);margin:26px 0 10px}
+.flow li.gate{background:var(--navy);border-color:var(--navy);color:#C9CFEA}
+.flow li.gate > b{color:#fff}
+.flow li.gate::before{color:#FFB48A}
+table.guard td:first-child{font-weight:700;color:var(--ink);width:24%}
+table.guard td:last-child{width:26%}
+table.guard td:last-child code{display:inline-block;white-space:normal;overflow-wrap:anywhere;margin:0 0 4px;font-size:var(--fs-label)}
+@media (max-width:900px){
+  .diagram{padding:20px 16px}
+  .diagram svg{min-width:820px}
+  .state{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap ops">
+
+<header class="top">
+  <a class="name" href="index.html" lang="en">Eunsang Lee</a>
+  <nav aria-label="사이트 이동">
+    <a href="peoplelaw.html">피플로</a>
+    <a href="agent-ops.html" aria-current="page">에이전트 운영</a>
+    <a href="overedge.html">KAIST OverEdge</a>
+    <a href="index.html#contact">연락처</a>
+    <a class="lang" href="en/index.html" lang="en">EN</a>
+  </nav>
+</header>
+
+<main>
+<div class="case-head">
+  <p class="kicker">Case Study 02 · Agent Operations</p>
+  <h1><span class="pname">에이전트 운영</span><span class="pdesc">코드는 에이전트가 쓰고, <em>완료 판정은 CI만</em> 내리는 개발 하네스</span></h1>
+  <p class="lead">피플로의 코드는 AI 에이전트가 쓰고, 저는 범위와 승인 기준을 정했습니다. 에이전트의 "완료했습니다"를 믿지 않아도 되도록 세션별 쓰기 범위, 다른 회사 모델의 교차 검토, 해시로 잠근 시험, CI 단계 관문을 하나의 하네스로 묶어 운영했습니다.</p>
+  <p class="byline"><span><b>대상</b> 피플로 개발</span><span><b>기간</b> 2026.08 ~ 2026.10</span><span><b>구성</b> Claude Code (작성, 총괄) · Codex (검토) · GitHub Actions</span><span><b>수치 기준일</b> 2026.10.25</span></p>
+  <ul class="metrics">
+    <li class="metric"><span class="v">4,718<small>건</small></span><span class="l">CI 통과 시험</span><span class="d">작업 8개. PR 41건 가운데 34건 병합</span></li>
+    <li class="metric"><span class="v">279<small>개</small></span><span class="l">교차 검토 기록</span><span class="d">Codex의 읽기 전용 검토 원문</span></li>
+    <li class="metric"><span class="v">136<small>건</small></span><span class="l">결정 기록 (ADR)</span><span class="d">결정 1건에 파일 1개</span></li>
+    <li class="metric"><span class="v">19<small>건</small></span><span class="l">사람 승인 기록</span><span class="d">승인한 문장을 원문으로 보존</span></li>
+  </ul>
+  <ul class="toc" aria-label="이 글의 순서">
+    <li><a href="#topology">세션 구성</a></li>
+    <li><a href="#loop">작업 루프</a></li>
+    <li><a href="#guardrails">가드레일</a></li>
+    <li><a href="#authority">결정 권한</a></li>
+  </ul>
+</div>
+
+<section id="topology" aria-labelledby="topology-title">
+  <h2 id="topology-title">세션 구성과 쓰기 범위</h2>
+  <p class="intro">총괄 세션 하나가 지시를 받아 작업 세션에 나누고, 작업 세션은 정해진 경로만 고칩니다. 검토는 다른 회사 모델이, 완료 판정은 CI가 맡습니다.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 912 452" role="img" aria-labelledby="topo-t topo-d">
+      <title id="topo-t">세션 구성도</title>
+      <desc id="topo-d">사람이 총괄 세션 하나에만 지시와 승인을 넣는다. 총괄 세션은 코어 세션과 화면 세션에 작업을 나누고 Codex에 읽기 전용 검토를 요청한다. 작업 세션의 변경은 PR로 CI에 들어가고, 완료 판정은 CI 단계 관문만 내린다.</desc>
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
+
+      <rect class="n-human" x="266" y="4" width="280" height="64" rx="12"/>
+      <text class="t w" x="406" y="31" text-anchor="middle">사람 · Builder</text>
+      <text class="w2" x="406" y="53" text-anchor="middle">범위 결정, 승인, 판정 기준 값</text>
+
+      <line class="ln" x1="406" y1="68" x2="406" y2="117" marker-end="url(#ah)"/>
+      <text class="m" x="420" y="98">지시와 승인은 이 창 하나로만</text>
+
+      <rect class="n-ai" x="196" y="120" width="420" height="92" rx="12"/>
+      <text class="lb" x="216" y="144">ORCHESTRATOR</text>
+      <text class="t" x="216" y="169">총괄 세션 <tspan class="m" dx="6">Claude Code</tspan></text>
+      <text x="216" y="194">작업 배분 · STATUS 갱신 · 검토 호출 · push와 CI 실행</text>
+
+      <line class="ln" x1="619" y1="166" x2="697" y2="166" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <text class="m" x="658" y="154" text-anchor="middle">검토 요청</text>
+      <text class="m" x="658" y="187" text-anchor="middle">의견 원문</text>
+
+      <rect class="n-ai" x="700" y="120" width="212" height="92" rx="12"/>
+      <text class="lb" x="718" y="144">REVIEWER</text>
+      <text class="t" x="718" y="169">Codex <tspan class="m" dx="6">다른 회사 모델</tspan></text>
+      <text x="718" y="194">읽기 전용, 코드를 고치지 않음</text>
+
+      <line class="ln" x1="300" y1="215" x2="300" y2="257" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <text class="m" x="314" y="241">배분 ↓ · 보고 ↑</text>
+
+      <rect class="grp" x="0" y="260" width="590" height="188" rx="14"/>
+      <text class="lb" x="16" y="284">WRITERS <tspan class="m" dx="8">경로마다 작성 세션은 하나</tspan></text>
+
+      <rect class="n-ai" x="14" y="298" width="274" height="136" rx="12"/>
+      <text class="t" x="30" y="324">코어 세션</text>
+      <text class="mono" x="30" y="345">core/ · docs/spec/ · rules_data/</text>
+      <rect class="sub" x="30" y="358" width="242" height="62" rx="8"/>
+      <text x="44" y="383">하위 에이전트 ×2 · git worktree</text>
+      <text class="m" x="44" y="405">겹치지 않는 경로, 병합은 코어 세션만</text>
+
+      <rect class="n-ai" x="302" y="298" width="274" height="136" rx="12"/>
+      <text class="t" x="318" y="324">화면 세션</text>
+      <text class="mono" x="318" y="345">web/</text>
+      <text x="318" y="383">코어 경로는 읽기만</text>
+      <text class="m" x="318" y="405">진행과 결과는 총괄에만 보고</text>
+
+      <line class="ln" x1="590" y1="366" x2="663" y2="366" marker-end="url(#ah)"/>
+      <text class="m" x="627" y="354" text-anchor="middle">PR</text>
+
+      <rect class="n-rule" x="666" y="298" width="246" height="136" rx="12"/>
+      <text class="lb" x="684" y="322">GATE</text>
+      <text class="t" x="684" y="347">CI <tspan class="m" dx="6">GitHub Actions</tspan></text>
+      <text x="684" y="383">작업 8개와 단계 관문</text>
+      <text class="m" x="684" y="405">완료 판정은 여기서만</text>
+    </svg>
+  </figure>
+  <p class="legend"><span><i class="chip human">사람</i> 결정과 승인</span><span><i class="chip ai">AI</i> 에이전트 세션</span><span><i class="chip rule">규칙</i> 자동 검사</span></p>
+
+  <h3 class="cap">세션이 바뀌어도 저장소에 남는 상태</h3>
+  <ul class="state">
+    <li><code>CLAUDE.md · AGENTS.md</code>작업 규칙. 두 모델이 같은 문서를 읽습니다</li>
+    <li><code>docs/STATUS.md</code>현재 상태만, 150줄 이하</li>
+    <li><code>docs/decisions/ADR-*.md</code>결정 1건에 파일 1개</li>
+    <li><code>docs/spec/locks.yaml</code>잠근 파일의 SHA-256</li>
+    <li><code>session-board.md</code>세션마다 한 줄씩 쓰는 상황판</li>
+  </ul>
+</section>
+
+<section id="loop" aria-labelledby="loop-title">
+  <h2 id="loop-title">작업 루프와 완료 판정</h2>
+  <p class="intro">모든 변경이 같은 순서를 탑니다. 사람은 변경마다 코드를 읽지 않고, 이 루프가 통과해야 하는 기준을 정합니다.</p>
+  <ol class="flow">
+    <li><b>명세</b>명세 없는 코드 변경은 받지 않습니다<div class="chips"><span class="chip ai">AI</span></div></li>
+    <li><b>실패하는 시험</b>기대값 파일을 먼저 씁니다<div class="chips"><span class="chip ai">AI</span></div></li>
+    <li><b>코드</b>자기 경로 안에서만 고칩니다<div class="chips"><span class="chip ai">AI</span></div></li>
+    <li><b>로컬 실행</b>통과한 뒤에만 push합니다<div class="chips"><span class="chip rule">규칙</span></div></li>
+    <li><b>교차 검토</b>Codex가 읽기 전용으로 봅니다<div class="chips"><span class="chip ai">AI</span></div></li>
+    <li class="gate"><b>CI 단계 관문</b>필수 시험 목록과 대조합니다<div class="chips"><span class="chip rule">규칙</span></div></li>
+  </ol>
+<pre class="code"><span class="c"># 완료 조건. CI 단계 관문이 내는 한 줄이 모두 맞아야 병합합니다</span>
+초록불 · 잠긴 파일 변경 <span class="k">0</span> · 필수 시험 건너뜀 <span class="k">0</span> · 필수 시험 ID 미실행 <span class="k">0</span>
+<span class="c"># 에이전트의 완료 보고는 이 조건에 들어가지 않습니다</span></pre>
+</section>
+
+<section id="guardrails" aria-labelledby="guardrails-title">
+  <h2 id="guardrails-title">에이전트의 실패 유형과 가드레일</h2>
+  <p class="intro">에이전트가 틀리는 방식을 먼저 적고, 유형마다 그것을 막는 도구를 붙였습니다.</p>
+  <div class="tablewrap">
+    <table class="guard">
+      <thead><tr><th scope="col">실패 유형</th><th scope="col">막는 장치</th><th scope="col">강제하는 곳</th></tr></thead>
+      <tbody>
+        <tr><td>검증 없이 완료 보고</td><td>완료는 CI 단계 관문만 판정합니다. 작업별 결과를 커밋 SHA와 실행 ID로 묶어 필수 시험 목록과 대조합니다.</td><td><code>tools/stage_gate.py</code></td></tr>
+        <tr><td>시험이나 검사 도구를 고쳐서 통과</td><td>승인한 시험, CI 워크플로, 검사 도구의 SHA-256을 잠금 목록에 올립니다. 검사기는 base 브랜치 판으로 실행해, 바뀐 검사기가 자신을 통과시키지 못합니다.</td><td><code>docs/spec/locks.yaml</code> <code>tools/lock_check.py</code></td></tr>
+        <tr><td>skip, xfail로 우회</td><td>아직 없는 시험은 단계 파일의 '예정' 목록에만 둡니다. 필수 시험 ID가 건너뛰어지거나 실행되지 않으면 실패합니다.</td><td><code>docs/spec/stages.yaml</code></td></tr>
+        <tr><td>금지한 동작이 구현에 섞임</td><td>금지한 동작을 실제로 시도하고 거부를 기대하는 시험 12종을 둡니다. 저장을 거부해야 하는 항목은 API, ORM, raw SQL 세 경로로 확인합니다.</td><td><code>core/tests/constitution/</code></td></tr>
+        <tr><td>두 세션이 같은 파일을 수정</td><td>경로마다 작성 세션은 하나입니다. 하위 에이전트는 git worktree에서 일하고 병합은 코어 세션만 합니다.</td><td><code>CLAUDE.md</code> 작업 규칙</td></tr>
+        <tr><td>작성 모델의 자기 검토 맹점</td><td>다른 회사 모델이 읽기 전용으로 검토합니다. 같은 판(revision)을 양쪽이 명시적으로 수용한 경우만 합의로 기록하고 원문을 보존합니다.</td><td><code>docs/proposals/codex-reviews/</code></td></tr>
+        <tr><td>세션이 바뀌며 맥락 유실</td><td>상태, 결정, 명세를 서로 다른 문서에 두고 문서 검사가 줄 상한과 형식을 확인합니다. 생성할 수 있는 문서는 손으로 쓰지 않습니다.</td><td><code>tools/docs_lint.py</code></td></tr>
+        <tr><td>CI 비용 초과</td><td>pre-push 훅이 근거 없는 push를 막고, 기록 문서만 바뀐 push는 CI를 돌리지 않습니다. 월 예산은 10달러입니다.</td><td><code>.git/hooks/pre-push</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">
+    <h3>교차 검토가 실제로 잡은 것 <span class="when">2026.09.01 첫 검토</span></h3>
+    <p>작성 모델의 자체 검토에는 없던 규칙 위반 3건을 Codex가 찾았고, 세 건 모두 사실로 확인했습니다. 그 뒤로 교차 검토를 루프에 넣었습니다.</p>
+    <ul>
+      <li>실제 회사명을 가리는 관문에 우회 경로가 있었습니다.</li>
+      <li>개정 문안에 확정 상태가 없었습니다.</li>
+      <li>발의 단계 법안에 걸어 둔 산출물 상한이 작동하지 않았습니다.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="authority" aria-labelledby="authority-title">
+  <h2 id="authority-title">사람과 AI의 결정 권한</h2>
+  <p class="intro">누가 무엇을 정할 수 있는지를 목록으로 나눴습니다. 처음에는 승인을 모두 사람이 했고, 운영하면서 조건을 붙여 두 모델의 합의에 넘긴 범위를 넓혔습니다.</p>
+  <div class="lanes">
+    <div class="lane human">
+      <span class="chip human">사람</span>
+      <h3>사람만 정하는 것</h3>
+      <ul>
+        <li>절대 규칙과 승인 규칙의 문구</li>
+        <li>판정 기준 값의 법률 정확성 확정</li>
+        <li>핵심 데이터 구조(스키마) 변경</li>
+        <li>외부 계정과 결제, force push처럼 되돌리기 어려운 조작</li>
+      </ul>
+    </div>
+    <div class="lane ai">
+      <span class="chip ai">AI</span>
+      <h3>Claude와 Codex의 합의</h3>
+      <ul>
+        <li>구현 선택, 명세 정책, PR 순서</li>
+        <li>잠금 교체. 전후 해시와 검증 결과를 기록하는 조건입니다</li>
+        <li>같은 판을 양쪽이 수용해야 하고, 이유와 남는 위험을 적습니다</li>
+        <li>묶어서 사람에게 보고하고, 사람은 언제든 되돌립니다</li>
+      </ul>
+    </div>
+    <div class="lane rule">
+      <span class="chip rule">규칙</span>
+      <h3>CI만 판정하는 것</h3>
+      <ul>
+        <li>기능과 무결성의 완료</li>
+        <li>잠금 해시 대조</li>
+        <li>필수 시험의 실행 여부</li>
+        <li>생성 문서와 원본의 일치</li>
+      </ul>
+    </div>
+  </div>
+  <p class="small" style="margin-top:22px">제품 안의 LLM에도 같은 경계를 두었습니다. LLM은 초안만 만들고, 판정은 규칙 엔진이, 확정은 사람이 합니다. <a href="peoplelaw.html#blueprint">피플로의 구조 보기 →</a></p>
+</section>
+
+<div class="pager">
+  <a href="peoplelaw.html">← 이전: 피플로</a>
+  <a href="overedge.html">다음: KAIST OverEdge →</a>
+</div>
+</main>
+
+<footer id="contact">
+  <div class="box">
+    <div>
+      <h2>연락처</h2>
+      <p>이 작업에 대해 더 듣고 싶으시면 메일이나 LinkedIn으로 연락 주세요.</p>
+    </div>
+    <div class="links">
+      <a href="mailto:katherineeslee@gmail.com">katherineeslee@gmail.com</a>
+      <a href="https://linkedin.com/in/eslee279">linkedin.com/in/eslee279</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

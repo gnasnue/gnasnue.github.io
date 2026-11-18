@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eunsang Lee | AI portfolio</title>
+<meta name="description" content="Twelve years of hands-on work in HR policy and HR systems, now designing AI products. PeopleLaw (HR compliance platform), agent operations, and an AI agent program at KAIST.">
+<meta property="og:title" content="Eunsang Lee | AI portfolio">
+<meta property="og:description" content="Twelve years of hands-on work in HR policy and HR systems. Now I design AI products.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23182259'/%3E%3Crect x='7' y='13' width='18' height='6' rx='3' fill='%23E85D14'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../site.css">
+<style>body{word-break:normal;overflow-wrap:break-word}</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <a class="name" href="index.html" aria-current="page">Eunsang Lee</a>
+  <nav aria-label="Site">
+    <a href="peoplelaw.html">PeopleLaw</a>
+    <a href="#contact">Contact</a>
+    <a class="lang" href="../index.html" lang="ko">KO</a>
+  </nav>
+</header>
+
+<main>
+<div class="hero">
+  <p class="kicker">HR Transformation · AI Product Planning</p>
+  <h1>Twelve years of hands-on work in HR policy and HR systems. Now I design <em>AI products</em>.</h1>
+  <dl class="pillars">
+    <div>
+      <dt>Policy</dt>
+      <dd>At a workplace with a majority union: <b>designed and introduced a development-focused performance review system</b>, served as in-house working-level PM for a <b>performance-based pay rollout and review redesign</b>, and <b>designed the pay and bonus changes for Korea's 52-hour workweek rule</b> (711 employees in scope)</dd>
+    </div>
+    <div>
+      <dt>Systems</dt>
+      <dd>Business-side PM for <b>four rounds of HR system (HRM) build-out</b> (applicant tracking, e-contracts, onboarding automation), <b>designed access and view permissions</b>, ran regular HR metrics reporting to executives</dd>
+    </div>
+    <div>
+      <dt>AI projects</dt>
+      <dd><a href="peoplelaw.html">PeopleLaw</a><sup>*</sup>, an HR compliance platform; AiDay, an AI parenting agent; CareerPT, an AI career coach (team); Peace-Collector, a mental wellness project (team)
+        <span class="fn"><sup>*</sup> Reached the final audition of a four-month AI agent program run by KAIST's graduate school of AI and startup institute.</span></dd>
+    </div>
+  </dl>
+</div>
+
+<section id="demo" aria-labelledby="demo-title" style="border-top:0;padding-top:6px">
+  <h2 id="demo-title">One legal change, processed end to end</h2>
+  <p class="intro">A 72-second walkthrough: leave for an employee whose spouse gives birth is extended from 10 to 20 days, and a fictional company works through applicability, affected clauses, revised wording, procedure, and fulfillment. The product UI is in Korean.</p>
+  <figure class="shot">
+    <div class="browser" aria-hidden="true"><i></i><i></i><i></i><span>PeopleLaw · demo (fictional company data)</span></div>
+    <video controls preload="none" poster="../assets/video/poster.jpg">
+      <source src="../assets/video/peoplelaw-demo.mp4" type="video/mp4">
+    </video>
+    <figcaption><b>PeopleLaw demo video.</b> Made while preparing for the KAIST OverEdge final Demo Day. The company and people on screen are fictional. The live demo needs an access code, so the flow is shown through this video. Structure and design intent are in the <a href="peoplelaw.html#blueprint">case study</a>.</figcaption>
+  </figure>
+  <ul class="metrics" aria-label="Supporting figures" style="margin-top:16px">
+    <li class="metric"><span class="v">100 → 50</span><span class="l">KAIST OverEdge selection</span><span class="d">Two selection rounds, then the final Demo Day (Jul to Oct 2026)</span></li>
+    <li class="metric"><span class="v">5<small> areas</small></span><span class="l">Where AI never concludes</span><span class="d">Legal judgment stays "needs review" and goes to an expert</span></li>
+    <li class="metric"><span class="v">12</span><span class="l">Forbidden-action tests</span><span class="d">Each one deliberately tries to cross a line</span></li>
+    <li class="metric"><span class="v">4,718</span><span class="l">Development tests passing (not a customer outcome)</span><span class="d">The scope of checks that run before code is merged</span></li>
+  </ul>
+</section>
+
+<section id="works" aria-labelledby="works-title">
+  <h2 id="works-title">Work</h2>
+  <ol class="works">
+    <li class="work">
+      <div>
+        <p class="no">CASE STUDY 01 · PRODUCT</p>
+        <h3><a href="peoplelaw.html">PeopleLaw: an AI-based HR compliance platform that maps regulatory changes to company-specific actions and records the decisions behind them</a></h3>
+        <p class="meta">HR compliance platform | Aug 2026 to present | Builder: product definition, decision and approval criteria, agent development operations</p>
+        <p>AI writes drafts, a rule engine checks the statute's conditions against company facts, and people confirm applicability and wording. In five areas that need legal judgment, the system does not conclude and routes the question to an expert. It is a demo product built on fictional company data.</p>
+        <a class="go" href="peoplelaw.html">Read the case study →</a>
+      </div>
+    </li>
+    <li class="work">
+      <div>
+        <p class="no">CASE STUDY 02 · AGENT OPERATIONS</p>
+        <h3>Agent operations: agents write the code, and only CI decides when the work is done</h3>
+        <p class="meta">How PeopleLaw was built | Aug to Oct 2026 | Claude Code, Codex, GitHub Actions</p>
+        <p>AI agents wrote PeopleLaw's code. I set the scope and the approval criteria. Each session could write only to its own paths, a model from a different provider reviewed the work read-only, and tests and check tools were hash-locked so an agent could not edit them to pass. Work counted as done only when the CI stage gate passed. The first cross-review found 3 rule violations that the writing model's own review had missed.</p>
+        <a class="go" href="../agent-ops.html">Read in Korean →</a>
+      </div>
+    </li>
+    <li class="work">
+      <div>
+        <p class="no">PROGRAM · KAIST</p>
+        <h3>KAIST OverEdge: four months from selection to the final Demo Day</h3>
+        <p class="meta">AI Agent program, first cohort, run jointly by KAIST's startup institute and its graduate school of AI | Jul to Oct 2026</p>
+        <p>Two months of training and two months of build-up, with three review gates. Faculty of KAIST's graduate school of AI taught deep learning and NLP fundamentals, building products with coding agents, and evaluating pretrained models. The final Demo Day panel included reviewers from three groups: mentors active in Silicon Valley, former vice presidents at major tech companies, and faculty.</p>
+        <a class="go" href="../overedge.html">Curriculum in Korean →</a>
+      </div>
+    </li>
+  </ol>
+  <ul class="minor" aria-label="Other work">
+    <li>
+      <h3>AiDay: an AI agent that tells working parents what their child needs today</h3>
+      <p class="meta">Solo project | Apr to Jul 2026 | The idea I was selected for KAIST OverEdge with</p>
+      <p>It interprets weather, air quality, pollen, and UV data against a child's profile and suggests what a parent may want to prepare that morning. I designed, built, and deployed it alone with Claude Code. Clothing advice is computed by <strong>rules</strong>, and only the summary report is written by Claude. It combines <strong>four public data feeds</strong> in real time and separates each user's data with row-level security. I surveyed 32 parents and interviewed parents of children under 8. <a href="https://myaiday.co" rel="noopener">Live service (Korean)</a></p>
+    </li>
+    <li>
+      <h3>CareerPT: an AI coach that connects personal strengths to career direction and action</h3>
+      <p class="meta">KAIST MBA team project | Mar to Jun 2026 | Competitive analysis, AI feature implementation, evaluation harness</p>
+      <p>Built on <strong>CliftonStrengths</strong> (the user's top 5 of 34 themes) and <strong>ICF coaching competencies</strong>, with a four-phase career interview. In a team project, I built a repeatable evaluation setup: <strong>34 personas</strong> simulate coaching sessions to refine prompts, and the coach, the persona, and the judge run on <strong>different AI models</strong> to reduce the bias of a model grading its own answers. Action items pass a five-part validation gate before they are shown. We collected 4 user interviews, feedback from 11 users after launch, and 46 peer reviews. <a href="https://ai-team3.vercel.app/" rel="noopener">Live service (Korean)</a></p>
+    </li>
+    <li>
+      <h3>Peace-Collector: an app for logging everyday anxiety and collecting small moments of calm</h3>
+      <p class="meta">KAIST MBA team project (four people) | Sep to Oct 2026 | Home and splash screens</p>
+      <p>Four KAIST MBA students split the app by screen and feature and built it in parallel, each working with an <strong>AI coding agent</strong>. I owned the <strong>home screen and the splash screen</strong>: I wrote the mockups and screen specs first, then rebuilt the home prototype for the design refresh. We defined the user as women in their 20s to 40s who want short, low-pressure interactions, and shipped a <strong>mobile web beta</strong> that opens from a QR code with no install or sign-up. Anxiety logs stay on the device, and usage is measured only with consent (screen names and time spent, never the content). Built with Swift 6, SwiftUI, and WidgetKit for iOS, and React, TypeScript, Vite, and Tailwind CSS on Cloudflare Pages for the web beta. <a href="https://peace-collector.pages.dev" rel="noopener">Web beta (Korean)</a></p>
+    </li>
+    <li>
+      <h3>One-on-one teaching assistant, hands-on generative AI training for Samsung affiliate presidents</h3>
+      <p class="meta">Oct 2026</p>
+      <p>I worked as a teaching assistant in a hands-on generative AI session attended by <strong>about 50 presidents</strong> of Samsung Group affiliates. During the lab I sat one-on-one with the participants assigned to me, helped them build their own project, and explained how it worked. Coverage of the event (Korean): <a href="https://www.chosun.com/economy/industry-company/2026/10/30/KI2UUPZ4PFCZ3DY2IZBDAB4BF4/" rel="noopener">Chosun Ilbo</a> · <a href="https://news.samsung.com/kr/%EC%82%BC%EC%84%B1-%EC%83%98-%EC%98%AC%ED%8A%B8%EB%A8%BC%EA%B3%BC-ai-%ED%98%81%EC%8B%A0-%EA%B0%84%EB%8B%B4%ED%9A%8C-%EA%B0%9C%EC%B5%9C-ai-driven-%EA%B2%BD%EC%98%81-%EA%B0%95%ED%99%94" rel="noopener">Samsung Newsroom</a></p>
+    </li>
+  </ul>
+</section>
+
+<section id="can" aria-labelledby="can-title">
+  <h2 id="can-title">What I can take on</h2>
+  <p class="intro">Each item is something I did in the work above.</p>
+  <div class="two">
+    <div class="card"><span class="tag">01 · WORKFLOW DESIGN</span><h3>Splitting a workflow across AI, rules, and people</h3><p>Deciding which steps get an AI draft, which are computed by rules, and which a person must confirm. The list of things AI must not decide comes first.</p></div>
+    <div class="card"><span class="tag">02 · EVALUATION</span><h3>Tests for AI quality and boundaries</h3><p>Tests that deliberately attempt forbidden actions, pass thresholds set by a person, and evaluation that uses different models for different roles.</p></div>
+    <div class="card"><span class="tag">03 · AGENT OPERATIONS</span><h3>Rules for how agents work</h3><p>Scope per agent, one definition of done, a list of what needs human approval, cost limits, and records for each.</p></div>
+    <div class="card"><span class="tag">04 · ENABLEMENT</span><h3>Helping practitioners use AI themselves</h3><p>Sitting with people one at a time while they build, and explaining the principle behind it. This builds on my HR experience introducing new systems and policies to employees.</p></div>
+  </div>
+</section>
+
+<section id="about" aria-labelledby="about-title">
+  <h2 id="about-title">About</h2>
+  <div class="narrow">
+    <p>I worked in HR at a Korean construction company for 12 years and 4 months, covering training, payroll and compensation, recruiting, and HR planning in turn. I am now in the KAIST MBA program. In 2026 I built an AI product at KAIST OverEdge.</p>
+    <p>My HR career is in my resume. This site covers only what I built and ran with AI. The full site is in <a href="../index.html">Korean</a>.</p>
+  </div>
+</section>
+</main>
+
+<footer id="contact">
+  <div class="box">
+    <div>
+      <h2>Contact</h2>
+      <p>If you would like to hear more about this work, email me or reach out on LinkedIn.</p>
+    </div>
+    <div class="links">
+      <a href="mailto:katherineeslee@gmail.com">katherineeslee@gmail.com</a>
+      <a href="https://linkedin.com/in/eslee279">linkedin.com/in/eslee279</a>
+    </div>
+  </div>
+  <p class="fine">Figures and role descriptions on this site are based on repository records and my career records. The company and people shown on product screens are fictional, and no real company material is included.</p>
+</footer>
+
+</div>
+</body>
+</html>

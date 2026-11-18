@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>피플로 케이스 스터디 | 이은상</title>
+<meta name="description" content="법이 바뀌면 회사 규정 어디를 고칠지 찾고 고친 근거를 남기는 HR 컴플라이언스 플랫폼 피플로. 개발 의도, 구조와 설계 의도, 검증">
+<meta property="og:title" content="피플로: 외부 규제 변화를 우리 회사의 영향 분석, 매핑, 기록으로 잇는 AI 기반 HR 컴플라이언스 플랫폼">
+<meta property="og:description" content="AI는 초안을, 규칙은 판단 근거를, 사람은 최종 결정을 책임지는 HR 컴플라이언스 플랫폼">
+<meta property="og:type" content="article">
+<meta property="og:image" content="assets/blueprint.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23182259'/%3E%3Crect x='7' y='13' width='18' height='6' rx='3' fill='%23E85D14'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <a class="name" href="index.html" lang="en">Eunsang Lee</a>
+  <nav aria-label="사이트 이동">
+    <a href="peoplelaw.html" aria-current="page">피플로</a>
+    <a href="agent-ops.html">에이전트 운영</a>
+    <a href="overedge.html">KAIST OverEdge</a>
+    <a href="index.html#contact">연락처</a>
+    <a class="lang" href="en/peoplelaw.html" lang="en">EN</a>
+  </nav>
+</header>
+
+<main>
+<div class="case-head">
+  <p class="kicker">Case Study 01 · Product</p>
+  <h1><span class="pname">피플로<small>(PeopleLaw)</small></span><span class="pdesc">외부 규제 변화를 <em>우리 회사의 영향 분석, 매핑, 기록</em>으로 잇는 AI 기반 HR 컴플라이언스 플랫폼</span></h1>
+  <p class="lead">인사 실무 12년 동안 겪은 문제를 AI로 풀기 위해 만든 제품입니다. 법령이나 회사 조건이 바뀌면 손봐야 할 규정 조항, 신청 양식, 인사시스템 설정을 찾아 주고, 누가 무엇을 근거로 확정했는지를 기록으로 남깁니다.</p>
+  <ul class="toc" aria-label="이 글의 순서">
+    <li><a href="#why">문제</a></li>
+    <li><a href="#blueprint">구조와 설계 의도</a></li>
+    <li><a href="#eval">검증과 규모</a></li>
+    <li><a href="#stack">기술 구성</a></li>
+    <li><a href="#faq">묻고 답하기</a></li>
+  </ul>
+</div>
+
+<div class="case-after">
+  <p>KAIST AI대학원과 KAIST 창업원이 주관한 AI Agent 프로그램에서 4개월 동안 교육과 선발 절차를 거쳤습니다. 선발 인터뷰와 1차 오디션에서 문제 인식, AI 활용 역량, 사업 모델을 에이전트로 구현한 정도를 심사받아 50명에 들었고, 최종 오디션에서 피플로를 발표했습니다.</p>
+  <div class="proof">
+    <span class="t">KAIST AI대학원 · KAIST 창업원 주관 AI Agent 프로그램 (KAIST OverEdge, 2026.07 ~ 10)</span>
+    <ol aria-label="선발 경로">
+      <li>100명 선발</li><li class="arrow" aria-hidden="true">→</li>
+      <li>50명 선발</li><li class="arrow" aria-hidden="true">→</li>
+      <li class="end">최종 오디션 진출</li>
+    </ol>
+    <a href="overedge.html">교육 과정과 심사 내용 보기</a>
+  </div>
+  <div class="cta">
+    <a class="btn primary" href="index.html#demo">시연 영상 보기 (1분 12초)</a>
+  </div>
+</div>
+
+<section id="why" aria-labelledby="why-title">
+  <h2 id="why-title">외부 변화 하나는 내부 수정 하나로 끝나지 않습니다</h2>
+  <p class="intro">인사 현업 12년 동안 반복해서 겪은 문제에서 출발했습니다. 법령이나 판례가 하나 바뀌면 사내 규정 한 곳만 고치고 끝나지 않습니다. 인사 담당자는 "우리 회사에서는 어디까지 손봐야 하나"를 손으로 찾습니다.</p>
+  <figure class="shot wide pad">
+    <img src="assets/problem.webp" alt="외부 변화인 법령·판례 개정 1건이 인사 담당자의 수작업을 거쳐 규정(취업규칙 등 사내 규정 검토), 문서(근로계약서와 사내 양식 확인), 시스템(급여·근태 시스템 설정 점검), 절차(사내 공지와 노사 절차 진행) 네 갈래로 퍼지는 그림" width="2647" height="1005" loading="lazy">
+  </figure>
+  <div class="narrow" style="margin-top:30px">
+    <p>영향이 닿는 범위와 정도는 사안마다 달라지고, 규정과 계약서, 급여·근태 시스템, 노사 절차까지 넓게 걸칩니다. 그런데 HR 컴플라이언스나 노무·노사 대응 하나만 맡는 전담 인력을 두지 않는 회사가 많아, 이 일은 인사 담당자가 다른 업무와 함께 맡게 됩니다.</p>
+    <p>그 결과 어디에 영향이 있었고 왜 그렇게 정했는지의 <strong>이력과 맥락이 담당자의 파일과 기억에 흩어집니다.</strong> 담당자가 바뀌면 그 이력이 체계적으로 이어지지 않아, 다음 변경 때 같은 검토를 처음부터 다시 하게 됩니다.</p>
+  </div>
+
+  <h3>기존 솔루션으로 채워지지 않은 이유</h3>
+  <div class="two">
+    <div class="card">
+      <span class="tag">글로벌 HR SaaS</span>
+      <h3>인사 운영에는 강하지만, 회사별 차이를 맞추는 일은 고객 회사에 남습니다</h3>
+      <p>Workday, SAP SuccessFactors 같은 제품은 여러 나라의 고객이 함께 씁니다. 그런데 나라마다 노동법과 규제가 다르고, 업종·규모·인력 구성에 따라 적용 기준이 다르며, 회사가 쓰는 규정·양식·시스템도 모두 다릅니다. 그래서 법이 바뀔 때 우리 회사의 어느 조항과 양식에 닿는지를 잇는 일은 고객 회사의 몫으로 남습니다.</p>
+    </div>
+    <div class="card">
+      <span class="tag">국내 SI 구축</span>
+      <h3>회사에 맞춰 만들 수는 있지만, 바뀔 때마다 다시 손봐야 합니다</h3>
+      <p>회사별 맞춤 개발은 회사마다 처음부터 새로 설계해야 합니다. 법과 사내 문서가 바뀔 때마다 다시 고쳐야 해서, 그 유지 부담이 회사에 계속 남습니다.</p>
+    </div>
+  </div>
+  <div class="narrow" style="margin-top:22px">
+    <p>외부 변화와 내부 업무 사이에서 <strong>그 회사만의 맥락을 이해하고 유지하는 연결층</strong>이 비어 있었습니다. 피플로는 이 층을 만듭니다.</p>
+  </div>
+</section>
+
+<section id="blueprint" aria-labelledby="blueprint-title">
+  <h2 id="blueprint-title">구조와 설계 의도</h2>
+  <p class="intro">피플로는 법령 변경 한 건을 네 단계로 끝까지 처리합니다. 공식 법령을 매일 수집해 개정 전후 조문을 비교하고(<strong>감지</strong>), 법적 의무와 회사 사실을 대조해 영향을 받는 규정 조항, 양식 항목, 시스템 설정을 찾습니다(<strong>회사별 영향 매핑</strong>). 이어서 개정 문안과 절차를 정하고(<strong>검토·결정</strong>), 이행과 증빙, 결정 이력을 남겨 다음 변경 때 다시 씁니다(<strong>실행·보존</strong>).</p>
+  <p class="intro">단계마다 일하는 주체를 나눴습니다. <strong>AI는 초안</strong>을, <strong>규칙 엔진은 판단 근거</strong>를, <strong>사람은 최종 결정</strong>을 맡습니다. 법률 판단은 자동으로 확정하지 않고 전문가 검토로 넘깁니다.</p>
+  <figure class="shot dark wide">
+    <a href="assets/blueprint.webp" aria-label="설계도를 큰 그림으로 열기"><img src="assets/blueprint.webp" alt="피플로 설계도. 01 감지: 공식 변화 수집(시스템). 02 코어: 회사별 영향 매핑, 법적 의무와 회사 사실 대조(규칙, AI, 사람). 03 검토·결정: 개정 문안과 절차(AI, 규칙, 사람). 04 실행·보존: 이행·증빙·이력(사람, 시스템). 아래에 AI는 초안, 규칙 엔진은 판단 근거, 사람과 전문가는 최종 결정이라는 세 책임과, 법률 판단은 자동 확정하지 않고 검토 필요로 전문가에게 연결한다는 법률 안전선이 있다" width="2647" height="1178" loading="lazy"></a>
+  </figure>
+
+  <h3>왜 이렇게 설계했나: 인사 담당자의 눈으로</h3>
+  <div class="two">
+    <div class="card">
+      <span class="tag">01 · 영향 매핑이 중심</span>
+      <h3>알림에서 멈추지 않고 회사 안 어디까지 잇습니다</h3>
+      <p>법이 바뀐 것을 아는 것과 회사가 실제로 바뀌는 것은 다릅니다. 실무에서 손이 가는 곳은 개정 내용을 읽는 일이 아니라, 규정 조항과 신청 양식과 인사시스템 설정 가운데 손볼 곳을 찾는 일이었습니다. 그래서 <strong>회사별 영향 매핑</strong>을 제품의 중심에 두었습니다.</p>
+    </div>
+    <div class="card">
+      <span class="tag">02 · 책임을 셋으로</span>
+      <h3>AI는 초안, 규칙은 판단 근거, 사람은 최종 결정</h3>
+      <p>취업규칙의 문구는 직원의 근로조건이 됩니다. 그래서 AI의 답은 <strong>초안으로만 저장</strong>하고, 적용 여부와 문안은 담당자와 승인자가 확정합니다. 조건 대조와 기한 계산은 사람이 승인한 기준 값으로 규칙 엔진이 합니다. AI를 꺼도 같은 흐름이 끝까지 이어집니다.</p>
+    </div>
+    <div class="card">
+      <span class="tag">03 · 법률 안전선</span>
+      <h3>법률 판단은 시스템이 결론 내지 않습니다</h3>
+      <p>취업규칙 불이익 변경인지에 따라 밟아야 할 절차가 달라집니다. 이런 판단은 항상 <strong>'검토 필요'</strong>로 두고 전문가에게 넘깁니다. 대상은 다섯 영역입니다: 취업규칙 불이익 변경, 해고·징계의 정당성, 사용자성·단체교섭, 산업안전 위반, 자동화된 채용·평가 결정의 적법성. 이 선이 지켜지는지는 <a href="#eval">금지 동작 차단 시험</a>으로 확인합니다.</p>
+    </div>
+    <div class="card">
+      <span class="tag">04 · 근거의 보존</span>
+      <h3>담당자가 바뀌어도 근거가 남습니다</h3>
+      <p>누가 언제 무엇을 근거로 정했는지, 어떤 증빙으로 반영을 확인했는지를 사안 단위로 묶어 보존합니다. 다음 변경과 인수인계 때 그 묶음을 다시 꺼내 쓰도록 했습니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="eval" aria-labelledby="eval-title">
+  <h2 id="eval-title">검증과 규모</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th scope="col">지표</th><th scope="col">값</th><th scope="col">무엇을 뜻하나</th></tr></thead>
+      <tbody>
+        <tr><td class="k">제품 코드</td><td class="n">약 42,200줄</td><td>개발 분량입니다. 코어 서버(Python) 약 25,400줄, 웹 화면(TypeScript) 약 16,800줄이고, 코드는 AI 에이전트가 썼습니다.</td></tr>
+        <tr><td class="k">시험 코드</td><td class="n">약 63,200줄</td><td>개발 분량입니다. 코어 서버 약 46,750줄, 웹 화면 약 16,450줄입니다.</td></tr>
+        <tr><td class="k">자동 시험</td><td class="n">4,718건 통과</td><td>코드를 합치기 전에 도는 검사입니다. 한 번에 작업 여덟 개가 함께 돕니다.</td></tr>
+        <tr><td class="k">자동 검사 실행</td><td class="n">491회</td><td>2026.09.07 이후의 누적 실행 횟수입니다.</td></tr>
+        <tr><td class="k">끝까지 가는 사용자 흐름 시험</td><td class="n">29건 통과</td><td>수집함에서 종결 기록까지 브라우저로 끝까지 가 보는 시험입니다.</td></tr>
+        <tr><td class="k">금지 동작 차단 시험</td><td class="n">12종, 40건 모두 통과</td><td>정해 둔 12종의 금지 동작을 일부러 시도하는 시험 입력 40건에서 기대한 거부 결과를 확인했습니다.</td></tr>
+        <tr><td class="k">고객사 간 데이터 격리</td><td class="n">표 35개에 적용</td><td>고객사 자료가 담기는 35개 표에 데이터베이스 격리 정책을 적용했습니다.</td></tr>
+        <tr><td class="k">AI 출력의 서버 검증</td><td class="n">7단계</td><td>AI에 허용한 작업은 네 가지뿐입니다. 그 출력의 형식, 입력 범위, 공식 원문 인용, 숫자와 단위 등을 서버가 검사합니다.</td></tr>
+        <tr><td class="k">다른 모델의 교차 검토</td><td class="n">기록 279건</td><td>코드를 쓴 모델과 다른 회사의 모델이 읽기 전용으로 검토했습니다.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small">2026년 10월 25일 기준 저장소와 자동 검사 기록에서 확인한 값입니다. 코드 줄 수와 실행 횟수는 개발 규모를 보여 주는 값이고, 동작은 사용자 흐름 시험과 금지 동작 시험으로 확인했습니다. 법령 원문과 개정 내용은 공식 자료이며, 화면의 회사 정보와 판단·이행·증빙 기록은 시연용 가상 자료입니다.</p>
+  <div class="faq" style="margin-top:14px">
+    <details>
+      <summary>금지 동작 차단 시험 12종의 내용 보기</summary>
+      <div class="a" style="max-width:none">
+        <div class="tablewrap" style="margin:6px 0 0">
+          <table>
+            <thead><tr><th scope="col">번호</th><th scope="col">시도하는 것</th><th scope="col">기대하는 결과</th></tr></thead>
+            <tbody>
+              <tr><td class="n">C-01</td><td>금지 다섯 영역에 전문가 결론 없이 확정값 저장</td><td>거부. 값은 '검토 필요'로 남음</td></tr>
+              <tr><td class="n">C-02</td><td>근거와 재검토 조건 없이 '해당 없음' 저장</td><td>거부</td></tr>
+              <tr><td class="n">C-03</td><td>공식 원문 판이 아닌 글을 근거로 인용</td><td>거부</td></tr>
+              <tr><td class="n">C-04</td><td>아직 확정되지 않은 법(발의, 입법예고)에 허용 범위를 넘는 처리</td><td>거부</td></tr>
+              <tr><td class="n">C-05</td><td>전문가 검토 고지가 빠진 응답</td><td>오류 응답을 포함해 모든 응답에 고지 1회</td></tr>
+              <tr><td class="n">C-06</td><td>결정 기록, 원문 판, 회사 사실 판, 종결 기록을 고치거나 삭제</td><td>거부. 기록은 덧붙이기만 가능</td></tr>
+              <tr><td class="n">C-07</td><td>AI 초안을 규칙 엔진의 입력으로 사용, AI 작업자가 결정 기록에 쓰기</td><td>거부</td></tr>
+              <tr><td class="n">C-08</td><td>규칙 엔진이 적용 여부를 스스로 확정</td><td>엔진의 출력은 늘 '검토 필요'. 결론은 사람의 결정으로만 생김</td></tr>
+              <tr><td class="n">C-09</td><td>다른 고객사의 데이터 조회와 교차 저장</td><td>없는 번호와 같은 응답, 저장 거부</td></tr>
+              <tr><td class="n">C-10</td><td>실제 회사명 입력, 실제 문서 올리기</td><td>가명만 허용, 올리기는 기본 거부</td></tr>
+              <tr><td class="n">C-11</td><td>허용 목록에 없는 AI 작업 실행</td><td>데이터베이스 제약이 거부</td></tr>
+              <tr><td class="n">C-12</td><td>승인 기록 없이 핵심 데이터 구조 변경</td><td>실패</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+  </div>
+  <p class="small" style="margin-top:14px">개발 과정에서 쓴 검증 장치는 <a href="agent-ops.html">에이전트 운영 케이스 스터디</a>에 따로 적었습니다.</p>
+</section>
+
+<section id="stack" aria-labelledby="stack-title">
+  <h2 id="stack-title">기술 구성</h2>
+  <dl class="spec">
+    <dt>코어 서버</dt><dd><ul class="stack"><li>Python</li><li>FastAPI</li><li>PostgreSQL</li><li>Row Level Security</li><li>pytest</li></ul></dd>
+    <dt>웹 화면</dt><dd><ul class="stack"><li>TypeScript</li><li>vitest</li><li>Playwright</li></ul></dd>
+    <dt>판정</dt><dd><ul class="stack"><li>순수 함수 규칙 엔진</li><li>YAML 기준 데이터 (사람 승인)</li></ul></dd>
+    <dt>AI</dt><dd><ul class="stack"><li>Anthropic Claude (제품 안 초안)</li><li>서버 검증 7단계</li><li>평가 세트와 합격선 (설계)</li></ul></dd>
+    <dt>수집</dt><dd><ul class="stack"><li>법제처 국가법령정보 공식 원문</li><li>하루 1회 자동 실행</li></ul></dd>
+    <dt>배포와 검사</dt><dd><ul class="stack"><li>Render</li><li>Docker</li><li>GitHub Actions</li></ul></dd>
+    <dt>개발 방식</dt><dd><ul class="stack"><li>Claude Code (작성)</li><li>Codex (교차 검토)</li><li>결정 기록 (ADR)</li></ul></dd>
+  </dl>
+</section>
+
+<section id="faq" aria-labelledby="faq-title">
+  <h2 id="faq-title">묻고 답하기</h2>
+  <div class="faq">
+    <details>
+      <summary>AI가 법률 판단을 하나요?</summary>
+      <div class="a"><p>하지 않습니다. AI는 조항 매핑, 비교, 문안 같은 초안만 만듭니다. 조건 대조와 절차 계산은 규칙 엔진이 하고, 적용 여부와 문안은 사람이 확정합니다. 법률 판단이 필요한 다섯 영역은 '검토 필요'로 전문가에게 넘깁니다.</p></div>
+    </details>
+    <details>
+      <summary>범용 AI에 회사 규정을 넣고 물어보면 되지 않나요?</summary>
+      <div class="a"><p>그것도 실제 대안입니다. 피플로는 자료가 바뀔 때 관계를 갱신하고, 확인하지 않은 것을 구분하고, 다음 담당자에게 근거를 넘기는 흐름을 제품에 담았습니다. 같은 검토와 기록 수준을 유지하는 데 드는 전체 수고로 비교해야 한다고 봅니다.</p></div>
+    </details>
+    <details>
+      <summary>코드를 직접 쓰지 않았는데 어떻게 검증했나요?</summary>
+      <div class="a"><p>코드는 AI 에이전트가 썼고, 저는 무엇을 만들지와 무엇을 승인할지를 정했습니다. 정해 둔 범위의 자동 시험, 다른 회사 모델의 교차 검토, 사람 승인으로 개발 결과를 확인했습니다. 이 장치들이 모든 품질을 보증하지는 않습니다. 자세한 내용은 <a href="agent-ops.html">에이전트 운영 케이스 스터디</a>에 있습니다.</p></div>
+    </details>
+  </div>
+</section>
+
+<div class="pager">
+  <a href="index.html">← 첫 화면</a>
+  <a href="agent-ops.html">다음: 에이전트 운영 →</a>
+</div>
+</main>
+
+<footer id="contact">
+  <div class="box">
+    <div>
+      <h2>연락처</h2>
+      <p>이 작업에 대해 더 듣고 싶으시면 메일이나 LinkedIn으로 연락 주세요.</p>
+    </div>
+    <div class="links">
+      <a href="mailto:katherineeslee@gmail.com">katherineeslee@gmail.com</a>
+      <a href="https://linkedin.com/in/eslee279">linkedin.com/in/eslee279</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,376 @@
+/* 이은상 포트폴리오 공용 스타일 (v0.4, 2026-11-18)
+   글자 체계: 한 가지 글꼴(Pretendard). 크기와 굵기는 :root에 적은 값만 쓴다.
+   너비: 제목, 본문, 그림, 카드, 표가 모두 같은 한 단(960px 안쪽 912px)을 채운다.
+   색: 피플로 최종 발표 덱의 남색과 주황.
+   역할 표시: 주황 점선 = AI 초안, 회색 테두리 = 규칙 엔진, 남색 채움 = 사람의 확정 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+:root{
+  --bg:#F4F5F8; --surface:#FFFFFF; --ink:#0E1433; --text:#252B45; --muted:#4F5773; --faint:#7A829B; --line:#DDE1EA;
+  --navy:#182259; --navy-soft:#E9ECF8;
+  --accent:#E85D14; --accent-soft:#FDEDE2;
+  --rule:#4A5578; --rule-soft:#EEF1F7;
+  --sans:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Segoe UI",sans-serif;
+  --code:ui-monospace,SFMono-Regular,Menlo,Consolas,"D2Coding","Malgun Gothic",monospace;
+  /* 글자 크기 (v1.1, 2026-11-18): 일곱 단계만 쓴다 (48, 28, 20, 17, 15, 14, 12). 새 크기를 직접 적지 않는다 */
+  --fs-title:clamp(2rem,4.4vw,3rem);     /* 쪽 제목 h1 */
+  --fs-sub:clamp(1.2rem,2.2vw,1.5rem);     /* 쪽 제목 아래 설명 줄 */
+  --fs-h2:clamp(1.45rem,2.4vw,1.75rem);   /* 구획 제목 */
+  --fs-h3:1.25rem;                       /* 구획 안 소제목, 작업·과목 제목 */
+  --fs-h4:1.0625rem;                       /* 카드 제목 */
+  --fs-num:clamp(1.45rem,2.4vw,1.75rem);    /* 숫자 카드의 숫자 */
+  --fs-lead:1.0625rem;                    /* 머리말 소개 문단 */
+  --fs-body:1.0625rem;                   /* 본문 */
+  --fs-compact:.9375rem;                   /* 카드, 표, 목록 안의 글 */
+  --fs-small:.875rem;                      /* 보조 설명, 날짜, 그림 설명 */
+  --fs-chip:.875rem;                      /* 알약 모양 표시 */
+  --fs-label:.75rem;                     /* 꼬리표, 표 머리 */
+  --fs-display:var(--fs-title);          /* 예전 이름. 쪽 제목과 같은 크기 */
+  /* 굵기는 네 단계만 쓴다: 400 본문, 650 강조, 700 소제목과 이름표, 800 쪽·구획 제목과 숫자 */
+  --measure:100%;
+  --radius:14px;
+  --gap:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:var(--fs-body);line-height:1.75;letter-spacing:-.005em;word-break:keep-all;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:4px}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+img,video{max-width:100%;height:auto;display:block}
+strong,b{font-weight:650;color:var(--ink)}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+.narrow{max-width:var(--measure)}
+
+/* 작은 표지 글자: 모든 꼬리표가 같은 모양 */
+.kicker,.tag,.work .no,.course .no,.tldr b.t,.step h3 .n,.flow > li::before,.path time,section > h2::before,.areas li span,.bp-panel .t{
+  font-family:var(--sans);font-size:var(--fs-label);font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);line-height:1.4}
+
+/* 상단 */
+header.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;flex-wrap:wrap}
+.name{font-weight:800;font-size:var(--fs-h4);text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:10px;letter-spacing:-.02em}
+.name::before{content:"";width:22px;height:6px;border-radius:3px;background:var(--accent)}
+nav{display:flex;gap:4px;flex-wrap:wrap;align-items:center;font-size:var(--fs-small)}
+nav a{text-decoration:none;color:var(--muted);padding:6px 12px;border-radius:999px}
+nav a:hover{color:var(--ink);background:var(--surface)}
+nav a[aria-current="page"]{color:var(--ink);background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);font-weight:650}
+nav a.lang{font-size:var(--fs-chip);font-weight:700;letter-spacing:.06em;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+
+/* 제목 체계 */
+h1,h2,h3{color:var(--ink);letter-spacing:-.03em;margin:0}
+.kicker{display:flex;align-items:center;gap:12px;margin:0 0 18px}
+.kicker::before{content:"";width:28px;height:5px;border-radius:3px;background:var(--accent);flex:none}
+.hero{padding:40px 0 36px}
+.hero h1,.case-head h1{font-weight:800;font-size:var(--fs-title);line-height:1.22;margin:0 0 22px}
+.hero h1 em,.case-head h1 em{font-style:normal;color:var(--accent)}
+.lead{max-width:var(--measure);font-size:var(--fs-lead);line-height:1.75;margin:0 0 14px}
+/* 머리말 근거 줄: 제도, 시스템, AI 프로젝트 */
+.pillars{margin:0;border-top:1px solid var(--line)}
+.pillars > div{display:grid;grid-template-columns:7.2em 1fr;gap:4px 24px;padding:15px 0;border-bottom:1px solid var(--line)}
+.pillars dt{font-weight:800;font-size:var(--fs-compact);color:var(--navy);line-height:1.75;letter-spacing:-.01em}
+.pillars dd{margin:0;font-size:var(--fs-body);line-height:1.75;color:var(--text)}
+.pillars dd b{font-weight:700;color:var(--ink)}
+.pillars dd a{font-weight:700;color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness:2px}
+.pillars .fn{display:block;margin-top:8px;font-size:var(--fs-small);line-height:1.7;color:var(--muted)}
+.pillars .fn a{font-weight:650;color:var(--navy);text-decoration-color:currentColor;text-decoration-thickness:1px}
+.pillars sup{font-size:.72em;font-weight:700;color:var(--accent);line-height:0;margin-left:1px}
+.hero .lead{margin:0}
+.hero .lead a{font-weight:650}
+@media (max-width:640px){
+  .pillars > div{grid-template-columns:1fr;gap:2px;padding:13px 0}
+  .pillars dt{font-size:var(--fs-small);color:var(--accent)}
+}
+.hero .cta{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 0}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:650;font-size:var(--fs-compact);padding:11px 20px;border-radius:999px;border:1px solid var(--navy);color:var(--navy);background:var(--surface)}
+.btn.primary{background:var(--navy);color:#fff}
+.btn:hover{border-color:var(--accent)}
+
+/* 기본 정보: 이름표와 값을 두 줄로 맞춘다 */
+.byline{display:flex;flex-wrap:wrap;gap:6px 30px;max-width:var(--measure);margin:22px 0 0;padding:16px 0 0;border-top:1px solid var(--line);font-size:var(--fs-small);color:var(--text)}
+.byline span{display:inline-flex;gap:10px;align-items:baseline}
+.byline b{font-size:var(--fs-label);font-weight:700;letter-spacing:.08em;color:var(--faint)}
+
+/* 역할 표시 */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0;padding:0;list-style:none}
+.chip{display:inline-flex;align-items:center;font-size:var(--fs-chip);font-weight:650;line-height:1;padding:7px 12px;border-radius:999px;margin:0;letter-spacing:0;text-transform:none}
+.chip.ai{border:1.5px dashed var(--accent);color:var(--accent);background:var(--accent-soft)}
+.chip.rule{border:1.5px solid var(--rule);color:var(--rule);background:var(--rule-soft)}
+.chip.human{border:1.5px solid var(--navy);color:#fff;background:var(--navy)}
+.chip.sys{border:1.5px solid var(--line);color:var(--muted);background:var(--surface)}
+.legend{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center;font-size:var(--fs-small);color:var(--muted);margin:20px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+
+/* 숫자 카드 */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0;padding:0;list-style:none}
+.metrics.three{grid-template-columns:repeat(3,1fr)}
+.metric{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px 18px;margin:0;display:flex;flex-direction:column}
+.metric .v{font-weight:800;font-size:var(--fs-num);line-height:1.15;letter-spacing:-.04em;color:var(--navy)}
+.metric .v small{font-size:.5em;font-weight:650;letter-spacing:-.01em;color:var(--muted);margin-left:3px}
+.metric .l{font-weight:700;color:var(--ink);font-size:var(--fs-compact);margin-top:10px;line-height:1.4}
+.metric .d{color:var(--muted);font-size:var(--fs-small);line-height:1.55;margin-top:4px}
+
+/* 그림 */
+figure{margin:0}
+.shot{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 14px 34px -22px rgba(14,20,51,.35)}
+.shot img,.shot video{width:100%}
+.shot.dark{background:#0E1433;border-color:#0E1433}
+.shot.pad{padding:clamp(22px,3.6vw,46px) clamp(20px,4vw,52px)}
+figcaption{color:var(--muted);font-size:var(--fs-small);line-height:1.65;padding:14px 20px 16px;border-top:1px solid var(--line);background:var(--surface)}
+figcaption b{color:var(--ink)}
+.browser{display:flex;gap:6px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--rule-soft);font-size:var(--fs-label);color:var(--faint)}
+.browser i{width:9px;height:9px;border-radius:50%;background:#CBD1DF}
+.browser span{margin-left:8px}
+
+/* 구획: 번호, 제목, 한 줄 설명이 같은 왼쪽 줄에 선다 */
+main{counter-reset:sec}
+section{padding:52px 0 48px;border-top:1px solid var(--line)}
+section > h2{font-weight:800;font-size:var(--fs-h2);line-height:1.3;margin:0 0 12px}
+section > h2::before{counter-increment:sec;content:counter(sec,decimal-leading-zero);display:block;margin-bottom:10px}
+section > p.intro{color:var(--muted);max-width:var(--measure);margin:0 0 28px;font-size:var(--fs-body)}
+section > p.intro + p.intro{margin-top:-14px}
+/* 소개 문장 없이 제목 바로 아래에 표나 카드가 오는 구획도 같은 간격을 둔다 */
+section > h2:has(+ :not(p)){margin-bottom:24px}
+h3{font-weight:700;font-size:var(--fs-h3);line-height:1.4;margin:36px 0 14px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px;padding-left:1.15em}
+li{margin-bottom:6px}
+.muted{color:var(--muted)}
+.small{color:var(--muted);font-size:var(--fs-small)}
+
+/* 요약 상자 */
+.tldr{background:var(--navy-soft);border-left:5px solid var(--navy);border-radius:10px;padding:18px 22px;margin:26px 0 0;max-width:var(--measure)}
+.tldr b.t{display:block;color:var(--navy);margin-bottom:8px}
+.tldr p:last-child{margin:0}
+.stage{display:inline-flex;align-items:center;gap:8px;font-size:var(--fs-small);font-weight:650;color:var(--navy);background:var(--navy-soft);border-radius:999px;padding:6px 14px;margin:0 0 18px}
+.stage::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+
+/* 작업 목록 */
+.works{display:grid;gap:var(--gap);margin:0;padding:0;list-style:none}
+.work{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px 30px 24px;display:grid;grid-template-columns:1fr;gap:0;align-items:start;margin:0}
+.work.full{grid-template-columns:1fr;align-items:start}
+.work .no{margin:0 0 10px}
+.work h3{text-wrap:balance;margin:0 0 8px;font-size:var(--fs-h3);line-height:1.4;font-weight:700}
+.work h3 a{text-decoration:none}
+.work h3 a:hover{color:var(--accent)}
+.work .meta{color:var(--muted);font-size:var(--fs-small);margin:0 0 12px}
+.work p{text-wrap:pretty;margin:0 0 14px;max-width:var(--measure)}
+.work .go{font-weight:700;font-size:var(--fs-compact);color:var(--navy);text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:1px;margin-right:18px}
+.work .thumb{border-radius:10px;overflow:hidden;border:1px solid var(--line);align-self:center;background:#0E1433;display:block}
+.work .thumb img{width:100%;height:auto}
+.work .side{display:grid;gap:8px;align-content:center}
+.work .side .metric{padding:14px 16px 12px}
+.work .side .metric .v{font-size:var(--fs-num)}
+.work .side .metric .l{margin-top:6px;font-size:var(--fs-compact)}
+.work .metrics{margin:4px 0 18px}
+.work dl.spec{margin:6px 0 18px;padding-top:18px;border-top:1px solid var(--line)}
+.minor{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap);margin:var(--gap) 0 0;padding:0;list-style:none}
+.minor li{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 24px 20px;margin:0}
+.minor h3{margin:0 0 6px;font-size:var(--fs-h4);line-height:1.45}
+.minor .meta{color:var(--muted);font-size:var(--fs-small);margin:0 0 10px}
+.minor p{margin:0;font-size:var(--fs-compact);line-height:1.7}
+
+/* 케이스 머리말 */
+.case-head{padding:40px 0 36px}
+/* 머리말 틀 (v1.1): 꼬리표, 제목, 소개 한 문단, 기본 정보 한 줄, 숫자, 목차. 요약과 배경은 .case-after로 내린다 */
+.case-after{padding:0 0 44px}
+.case-after > :first-child{margin-top:0}
+.case-after .tldr,.case-after .proof{margin-top:0}
+.case-after p + .proof{margin-top:20px}
+.case-after .cta{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 0}
+/* 제품 이름 줄과 설명 줄을 나눈 제목 */
+.case-head h1 .pname{display:block;line-height:1.15;margin-bottom:.34em}
+.case-head h1 .pname small{font-size:.5em;font-weight:650;color:var(--muted);letter-spacing:-.01em;margin-left:.35em}
+.case-head h1 .pdesc{display:block;font-size:var(--fs-sub);font-weight:700;line-height:1.38;letter-spacing:-.025em}
+.case-head .metrics{margin-top:28px}
+.toc{font-size:var(--fs-small);color:var(--muted);margin:26px 0 0;padding:0;list-style:none;display:flex;gap:8px;flex-wrap:wrap}
+.toc li{margin:0}
+.toc a{text-decoration:none;display:inline-block;padding:5px 13px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.toc a:hover{color:var(--ink);border-color:var(--navy)}
+
+/* 단계 */
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:0 0 12px;padding:0;list-style:none;counter-reset:s}
+.flow > li{counter-increment:s;border-radius:12px;padding:14px 14px 12px;font-size:var(--fs-small);line-height:1.5;margin:0;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.flow > li::before{content:"0" counter(s);display:block;margin-bottom:6px}
+.flow > li > b{display:block;font-weight:700;color:var(--ink);font-size:var(--fs-compact);margin-bottom:2px}
+.flow .chips{margin-top:10px;gap:5px}
+.flow .chip{font-size:var(--fs-label);padding:5px 8px}
+.steps{display:grid;gap:34px;margin-top:34px}
+.step h3{margin:0 0 12px;display:flex;align-items:baseline;gap:12px;font-size:var(--fs-h3)}
+
+/* 세 갈래 */
+.lanes{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);margin:22px 0 0}
+.lane{border-radius:var(--radius);padding:22px 22px 18px;font-size:var(--fs-compact);line-height:1.65;background:var(--surface);border:1px solid var(--line)}
+.lane h3{margin:12px 0 10px;font-size:var(--fs-h4)}
+.lane ul{margin:0;padding-left:1.1em}
+.lane.ai{border-top:4px dashed var(--accent)}
+.lane.rule{border-top:4px solid var(--rule)}
+.lane.human{border-top:4px solid var(--navy)}
+
+/* 표 */
+.tablewrap{overflow-x:auto;margin:0 0 18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:var(--fs-compact);line-height:1.6}
+th,td{text-align:left;vertical-align:top;padding:13px 18px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+th{font-weight:700;color:var(--muted);font-size:var(--fs-label);letter-spacing:.06em;background:var(--rule-soft);white-space:nowrap}
+td.k{font-weight:700;color:var(--ink);white-space:nowrap}
+td.n{font-weight:800;color:var(--navy);white-space:nowrap;letter-spacing:-.02em}
+table.trace th,table.trace td{padding:12px 13px}
+table.trace td:first-child{white-space:nowrap}
+table.trace .chip{font-size:var(--fs-label);padding:5px 9px}
+
+.note{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--navy);border-radius:10px;padding:20px 24px;margin:0 0 var(--gap)}
+.note h3{margin:0 0 8px;font-size:var(--fs-h4);line-height:1.45}
+.note .when{font-size:var(--fs-small);color:var(--faint);margin-left:8px;font-weight:400;letter-spacing:0}
+.note p{max-width:var(--measure)}
+.note p:last-child,.note ul:last-child{margin-bottom:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 24px 20px}
+.card h3{margin:0 0 8px;font-size:var(--fs-h4);line-height:1.45}
+.card p,.card li{font-size:var(--fs-compact);line-height:1.7}
+.card p:last-child,.card ul:last-child{margin-bottom:0}
+.card .tag{display:block;margin-bottom:10px}
+
+/* 기술 목록과 항목 표 */
+.stack{display:flex;gap:8px;flex-wrap:wrap;margin:0;padding:0;list-style:none}
+.stack li{font-size:var(--fs-chip);font-weight:650;padding:6px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--text);margin:0}
+dl.spec{display:grid;grid-template-columns:8.5em 1fr;gap:14px 22px;margin:0}
+dl.spec dt{font-weight:700;color:var(--ink);font-size:var(--fs-compact);line-height:1.75}
+dl.spec dd{margin:0;max-width:var(--measure)}
+dl.spec dd ul{margin:0;padding-left:1.1em}
+dl.spec dd ul.stack{padding-left:0}
+
+/* 묻고 답하기 */
+.faq{display:grid;gap:10px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.faq summary{cursor:pointer;padding:17px 22px;font-weight:700;color:var(--ink);list-style:none;display:flex;justify-content:space-between;gap:14px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--accent);font-weight:800;flex:none}
+.faq details[open] summary::after{content:"−"}
+.faq .a{padding:0 22px 18px;max-width:var(--measure)}
+.faq .a p:last-child{margin:0}
+
+/* 과목 */
+.course{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px 22px;margin:0 0 var(--gap);display:grid;grid-template-columns:230px 1fr;gap:10px 32px}
+.course .no{margin:0 0 10px}
+.course h3{margin:0 0 6px;font-size:var(--fs-h3);line-height:1.4}
+.course .when{color:var(--muted);font-size:var(--fs-small);margin:0}
+.course ul{margin:0;padding-left:1.1em;font-size:var(--fs-compact);line-height:1.7}
+.course li{margin-bottom:8px}
+.course p{font-size:var(--fs-compact);line-height:1.7}
+
+/* 선발 경로 */
+.path{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:0 0 20px;padding:0;list-style:none}
+.path li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 16px 14px;font-size:var(--fs-small);line-height:1.55;margin:0;color:var(--muted)}
+.path li b{display:block;font-size:var(--fs-h4);margin-bottom:4px;font-weight:700}
+.path li.gate{background:var(--navy);border-color:var(--navy);color:#C9CFEA}
+.path li.gate b{color:#fff}
+.path time{display:block;margin-bottom:8px;letter-spacing:.04em}
+.path li.gate time{color:#FFB48A}
+
+/* 코드, 다섯 영역, 확대 그림 */
+.zoom{display:grid;grid-template-columns:5fr 7fr;gap:var(--gap);margin:var(--gap) 0 0;align-items:stretch}
+.zoom .card{display:flex;flex-direction:column;justify-content:center}
+.zoom .card li{margin-bottom:12px}
+pre.code{margin:0 0 18px;padding:20px 24px;background:#0E1433;color:#DDE3FA;border-radius:var(--radius);font-family:var(--code);font-size:var(--fs-small);line-height:1.75;overflow-x:auto;white-space:pre;word-break:normal;overflow-wrap:normal;font-variant-numeric:normal}
+pre.code .c{color:#93A0D6}
+pre.code .k{color:#FFB48A}
+.areas{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:0 0 18px;padding:0;list-style:none}
+.areas li{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:12px;padding:16px;font-weight:700;color:var(--ink);font-size:var(--fs-compact);line-height:1.45;margin:0}
+.areas li span{display:block;margin-bottom:8px}
+
+/* 선발 경로 한 줄 표시 */
+.proof{max-width:var(--measure);margin:24px 0 0;padding:18px 22px 16px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--navy);border-radius:10px}
+.proof .t{display:block;font-size:var(--fs-small);font-weight:700;color:var(--ink);margin-bottom:12px;line-height:1.5}
+.proof ol{display:flex;gap:8px;flex-wrap:wrap;align-items:center;list-style:none;margin:0;padding:0}
+.proof li{margin:0;font-weight:700;font-size:var(--fs-compact);color:var(--navy);background:var(--navy-soft);border-radius:999px;padding:6px 14px;line-height:1.3}
+.proof li.arrow{background:none;padding:0;color:var(--faint);font-weight:400}
+.proof li.end{background:var(--navy);color:#fff}
+.proof a{display:inline-block;margin-top:12px;font-size:var(--fs-small);font-weight:650;color:var(--navy)}
+
+.pager{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:30px 0;border-top:1px solid var(--line);font-size:var(--fs-compact)}
+.pager a{text-decoration:none;font-weight:700;color:var(--navy)}
+.pager a:hover{color:var(--accent)}
+footer{padding:46px 0 64px;border-top:1px solid var(--line)}
+footer .box{background:var(--navy);color:#D5DAF0;border-radius:18px;padding:34px 36px;display:grid;grid-template-columns:1fr auto;gap:18px 30px;align-items:center}
+footer h2{font-weight:800;font-size:var(--fs-h2);line-height:1.3;margin:0 0 8px;color:#fff;letter-spacing:-.03em}
+footer p{margin:0}
+footer .links{display:grid;gap:8px;font-size:var(--fs-compact);font-weight:650}
+footer .links a{color:#fff;text-decoration-color:var(--accent)}
+footer .fine{color:var(--muted);font-size:var(--fs-small);margin-top:18px;max-width:var(--measure)}
+
+@media (max-width:900px){
+  .metrics,.metrics.three{grid-template-columns:1fr 1fr}
+  .work{grid-template-columns:1fr;padding:24px 22px 22px}
+  .work .thumb{max-width:420px}
+  .minor,.lanes,.two,.three,.zoom{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr 1fr}
+  .path{grid-template-columns:1fr}
+  .areas{grid-template-columns:1fr 1fr}
+  .course{grid-template-columns:1fr;padding:22px 20px 18px}
+  dl.spec{grid-template-columns:1fr;gap:2px 0}
+  dl.spec dd{margin-bottom:14px}
+  footer .box{grid-template-columns:1fr;padding:28px 24px}
+  table.trace thead{display:none}
+  table.trace tr{display:block;padding:12px 0;border-bottom:1px solid var(--line)}
+  table.trace tr:last-child{border-bottom:0}
+  table.trace td{display:block;border:0;padding:3px 16px;white-space:normal!important}
+  table.trace td::before{content:attr(data-l);display:block;font-size:var(--fs-label);font-weight:650;color:var(--faint);margin-top:6px}
+  table.trace td:first-child::before{display:none}
+}
+/* v0.7: 대표 작업 표시, 표와 모바일 그림 */
+.work.full{padding:26px 30px 24px}
+.work.full dl.spec{gap:10px 22px}
+td.n{font-weight:700}
+.tablewrap table{min-width:620px}
+table.trace{min-width:0}
+@media (max-width:900px){
+  :root{--fs-label:.8rem}
+  nav{font-size:var(--fs-compact);gap:6px}
+  .shot.wide{overflow-x:auto}
+  .shot.wide img{min-width:880px}
+  .shot.wide figcaption{min-width:0;position:sticky;left:0}
+}
+
+/* v1.2 (2026-11-18): 글 폭과 주황색 쓰임
+   글 폭: 문단과 목록은 한 줄 40자 안팎(680px)으로 좁히고, 그림·표·카드·상자는 한 단 전체를 쓴다.
+   주황: 꼬리표, 제목 속 강조, AI 역할 표시에만 쓴다. 구획 번호, 링크 밑줄, 펼침 표시는 회색과 남색. */
+:root{--measure-text:42.5rem}
+.lead,section > p.intro,.narrow,.case-after > p,.work p,.note p,.faq .a,dl.spec dd,footer .fine{max-width:var(--measure-text)}
+dl.spec dd:has(.stack){max-width:none}
+section > h2::before{color:var(--faint)}
+.work .go{border-bottom-color:var(--navy)}
+.pillars dd a{text-decoration-color:var(--navy)}
+footer .links a{text-decoration-color:rgba(255,255,255,.55)}
+.faq summary::after{color:var(--navy)}
+.btn:hover{border-color:var(--navy);background:var(--navy-soft)}
+.btn.primary:hover{background:var(--ink)}
+.work h3 a:hover,.pager a:hover{color:var(--navy);text-decoration:underline}
+
+/* v1.3 (2026-11-18): 상단 메뉴가 쪽을 옮겨도 같은 자리에 서도록
+   모든 쪽이 같은 항목을 같은 순서로 둔다. 현재 쪽 표시는 바탕과 색으로만 하고 굵기와 테두리 두께는 바꾸지 않는다. */
+html{scrollbar-gutter:stable}
+header.top{flex-wrap:nowrap;min-height:76px;padding:0}
+.name{font-size:1.0625rem;line-height:1;white-space:nowrap}
+.name::before{content:none}
+nav{flex-wrap:nowrap;font-size:var(--fs-small);gap:4px}
+nav a,nav a.lang{font-size:var(--fs-small);font-weight:500;line-height:1.4;padding:6px 12px;border:1px solid transparent;white-space:nowrap;letter-spacing:0}
+nav a[aria-current="page"]{font-weight:500;box-shadow:none;border-color:var(--line)}
+nav a.lang{font-weight:600;border-color:var(--line);margin-left:6px}
+@media (max-width:640px){
+  header.top{flex-wrap:wrap;min-height:0;padding:14px 0;gap:8px}
+  nav{flex-wrap:wrap;gap:2px}
+  nav a,nav a.lang{padding:5px 9px}
+}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@page{size:A4;margin:14mm 13mm}
+@media print{
+  body{font-size:10pt;line-height:1.55;background:#fff}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wrap{max-width:none;padding:0}
+  nav,.pager,.toc,video,.hero .cta{display:none}
+  section{padding:14px 0}
+  .hero,.case-head{padding:8px 0 14px}
+  .shot,.note,.lane,.work,.card,.course,.tablewrap,.metric,.faq details{break-inside:avoid;box-shadow:none}
+  a{text-decoration:none}
+}

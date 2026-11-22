@@ -33,6 +33,32 @@
   .bp-safe b{color:#FFB48A;display:block}
   @media (max-width:900px){.bp-grid,.bp-row{grid-template-columns:1fr}}
 </style>
+<style>
+/* Session topology diagram */
+.diagram{margin:0 0 14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px 28px 24px;overflow-x:auto}
+.diagram svg{display:block;width:100%;height:auto;font-family:var(--sans)}
+.diagram .n-human{fill:var(--navy)}
+.diagram .n-ai{fill:var(--surface);stroke:var(--accent);stroke-width:1.5;stroke-dasharray:6 4}
+.diagram .n-rule{fill:var(--rule-soft);stroke:var(--rule);stroke-width:1.5}
+.diagram .grp{fill:var(--bg)}
+.diagram .sub{fill:var(--accent-soft)}
+.diagram .ln{stroke:var(--rule);stroke-width:1.5;fill:none}
+.diagram .ah{fill:var(--rule)}
+.diagram text{fill:var(--text);font-size:var(--fs-small)}
+.diagram .t{font-size:var(--fs-h4);font-weight:700;fill:var(--ink);letter-spacing:-.02em}
+.diagram .lb{font-size:var(--fs-label);font-weight:700;letter-spacing:.12em;fill:var(--accent)}
+.diagram .m{fill:var(--muted);font-weight:400;font-size:var(--fs-small);letter-spacing:0}
+.diagram .mono{font-family:var(--code);font-size:var(--fs-label);fill:var(--navy)}
+.diagram .w{fill:#fff}
+.diagram .w2{fill:#C9CFEA}
+#build .legend{margin:0 0 14px}
+#build .legend i{font-style:normal}
+#build .tablewrap{margin-top:22px}
+@media (max-width:900px){
+  .diagram{padding:20px 16px}
+  .diagram svg{min-width:820px}
+}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -41,72 +67,49 @@
   <a class="name" href="index.html">Eunsang Lee</a>
   <nav aria-label="Site">
     <a href="peoplelaw.html" aria-current="page">PeopleLaw</a>
-    <a href="index.html#contact">Contact</a>
+    <a href="awards.html">Awards</a>
     <a class="lang" href="../peoplelaw.html" lang="ko">KO</a>
   </nav>
 </header>
 
-<main>
+<main class="nonum">
 <div class="case-head">
-  <p class="kicker">Case Study 01 · Product</p>
-  <h1><span class="pname">PeopleLaw</span><span class="pdesc">An AI-based HR compliance platform that <em>maps regulatory changes to company-specific actions</em> and records the decisions behind them</span></h1>
-  <p class="lead">I built PeopleLaw to solve a problem I lived with over 12 years in HR. When a labor law or a company condition changes, PeopleLaw identifies the policy clauses, form fields, and HR information system (HRIS) settings that may need to change, and keeps a record of who confirmed what, on which basis.</p>
-  <p class="lead">I spent four months in an AI agent program run jointly by KAIST's graduate school of AI and its startup institute. After reviews of problem definition, AI capability, and how far the business model was implemented as an agent, I was selected for the group of 50, and I presented PeopleLaw at the final Demo Day.</p>
-  <div class="proof">
-    <span class="t">KAIST OverEdge, an AI agent program run by KAIST's graduate school of AI and startup institute (Jul to Oct 2026)</span>
-    <ol aria-label="Selection path">
-      <li>100 selected</li><li class="arrow" aria-hidden="true">→</li>
-      <li>50 selected</li><li class="arrow" aria-hidden="true">→</li>
-      <li class="end">Final Demo Day</li>
-    </ol>
-  </div>
-  <div class="cta" style="display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 0">
-    <a class="btn primary" href="index.html#demo">Watch the 72-second demo</a>
-  </div>
+  <h1><span class="pname">PeopleLaw</span><span class="pdesc">An HR compliance tool that finds what a company must change when a law changes, and keeps the basis for each decision</span></h1>
+  <p class="sec-meta">Proof of concept (PoC) · Aug 2026 to present · Product definition, decision and approval criteria, AI agent development operations</p>
+  <p class="lead">A proof of concept in which I took a problem I met repeatedly over 12 years in HR, redefined it with what I learned in my MBA, and built it into a product with AI. I presented it at the final audition of an AI agent program run by KAIST's graduate school of AI and startup institute, after staged reviews.</p>
+  <p class="golinks"><a href="index.html#demo">Watch the 72-second demo →</a><a href="../overedge.html">Program and review details (Korean) →</a></p>
   <ul class="toc" aria-label="On this page">
-    <li><a href="#why">Problem</a></li>
-    <li><a href="#blueprint">Structure and design intent</a></li>
-    <li><a href="#eval">Verification and scale</a></li>
-    <li><a href="#stack">Stack</a></li>
-    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#why">The problem in practice</a></li>
+    <li><a href="#market">The problem, seen again in the MBA</a></li>
+    <li><a href="#blueprint">What I decided to build</a></li>
+    <li><a href="#build">How I used AI</a></li>
+    <li><a href="#eval">How far it goes</a></li>
   </ul>
 </div>
 
 <section id="why" aria-labelledby="why-title">
-  <h2 id="why-title">One external change never ends with one internal edit</h2>
-  <p class="intro">This started from a problem I met repeatedly over 12 years in HR. When a statute or a court ruling changes, fixing one internal policy is not the end of it. The HR practitioner works out by hand how far the change reaches inside the company.</p>
-  <div class="three">
-    <div class="card"><span class="tag">Policies</span><h3>Which clause?</h3><p>Work rules (취업규칙, the binding employment rules a Korean employer must maintain) and internal policies.</p></div>
-    <div class="card"><span class="tag">Forms</span><h3>Which field?</h3><p>Employment contracts, request forms, consent forms.</p></div>
-    <div class="card"><span class="tag">Systems and procedure</span><h3>Which setting, in what order?</h3><p>Payroll and attendance settings, then internal notice, employee consultation, and filing, each with its own evidence.</p></div>
-  </div>
-  <div class="narrow" style="margin-top:22px">
-    <p>The scope and depth of the impact vary from case to case, and it spreads across policies, contracts, payroll and attendance systems, and labor-management procedure. Yet many companies have no one dedicated solely to HR compliance or labor relations, so an HR practitioner handles this alongside other duties.</p>
-    <p>As a result, <strong>the history and context of what was affected and why a decision was made end up scattered across one person's files and memory.</strong> When that person moves on, the history is not handed over in any systematic way, and the next change starts the same review from scratch.</p>
-  </div>
+  <h2 id="why-title">One legal change never ends with one fix</h2>
+  <p class="sec-meta">01 · The problem in practice</p>
+  <p>When Korea introduced the 52-hour workweek, I drafted and simulated the changes to our pay and bonus structure. The law changed in one line, but the way working hours were entered, the payroll process, the payroll system's calculation logic, and the labor-management negotiation all had to change with it.</p>
+  <p>This repeats whenever a statute or court ruling changes. Yet many companies have no one dedicated to HR compliance, so an HR practitioner handles it alongside other duties, and the record of what was affected and why ends up scattered across one person's files and memory. When that person moves on, the next change starts the same review from scratch.</p>
+</section>
 
-  <h3>Why existing solutions leave this open</h3>
-  <div class="two">
-    <div class="card">
-      <span class="tag">Global HR SaaS</span>
-      <h3>Strong at HR operations, but fitting each company's differences stays with the customer</h3>
-      <p>Products such as Workday and SAP SuccessFactors serve customers in many countries. Labor law differs by country, the applicable criteria differ by industry, size, and workforce mix, and every company uses its own policies, forms, and systems. So when a law changes, connecting it to this company's clauses and forms remains the customer's job.</p>
-    </div>
-    <div class="card">
-      <span class="tag">Custom build by a local systems integrator</span>
-      <h3>It can be built for one company, but it must be reworked at every change</h3>
-      <p>A custom build is designed from scratch for each company. It has to be revised whenever the law or an internal document changes, and that maintenance burden stays with the company.</p>
-    </div>
-  </div>
-  <div class="narrow" style="margin-top:22px">
-    <p>Between external change and internal work, <strong>a layer that understands and maintains one company's own context</strong> was missing. PeopleLaw builds that layer.</p>
-  </div>
+<section id="market" aria-labelledby="market-title">
+  <h2 id="market-title">The gap existing solutions leave open</h2>
+  <p class="sec-meta">02 · The problem, seen again in the MBA</p>
+  <p>In the MBA I looked at this problem again from the market's side.</p>
+  <ul class="plain">
+    <li><b>Global HR SaaS</b> is strong at HR operations, but connecting a legal change to each company's own policies and forms, which differ by country, industry, and company, stays with the customer.</li>
+    <li><b>A custom build by a local systems integrator</b> can fit one company, but it has to be reworked whenever the law or an internal document changes.</li>
+    <li><b>A general-purpose AI</b> can answer questions about pasted policies, but updating relationships when a source changes, separating what has not been confirmed, and handing the basis to the next person are still left undone.</li>
+  </ul>
+  <p>What was missing was a layer that connects external change to the work inside a company and <b>keeps that company's own context</b>.</p>
 </section>
 
 <section id="blueprint" aria-labelledby="blueprint-title">
-  <h2 id="blueprint-title">Structure and design intent</h2>
-  <p class="intro">PeopleLaw processes one legal change to the end in four stages. It collects official statutes daily and compares the text before and after the amendment (<strong>detect</strong>), then checks the legal duty against company facts to find the policy clauses, form fields, and system settings affected (<strong>company-specific impact mapping</strong>). Next it settles the revised wording and procedure (<strong>review and decide</strong>), and keeps the fulfillment, evidence, and decision history for reuse at the next change (<strong>execute and retain</strong>).</p>
-  <p class="intro">Each stage has a clear owner. <strong>AI drafts</strong>, <strong>the rule engine supplies the basis for judgment</strong>, and <strong>people make the final decision</strong>. Legal judgment is never auto-confirmed. It goes to an expert for review.</p>
+  <h2 id="blueprint-title">Turning an HR practitioner's judgment into product principles</h2>
+  <p class="sec-meta">03 · What I decided to build</p>
+  <p class="intro">PeopleLaw handles one legal change in four stages: detect, company-specific impact mapping, review and decide, execute and retain. The design was driven by the risks I had seen in HR practice, not by the technology.</p>
   <div class="bp" role="img" aria-label="PeopleLaw blueprint: four stages (detect, map, review and decide, execute and retain) and three responsibilities (AI drafts, rule engine supplies the basis, people decide), with a legal safety line">
     <div class="bp-grid">
       <div class="bp-panel">
@@ -141,53 +144,104 @@
     </div>
     <div class="bp-safe"><b>Legal safety line</b>The system does not auto-confirm legal judgment. It routes the question to an expert as "needs review".</div>
   </div>
-  <p class="small" style="margin-top:12px">The original Korean blueprint is on the <a href="../peoplelaw.html#blueprint">Korean page</a>.</p>
-
-  <h3>Why it is designed this way: an HR practitioner's view</h3>
-  <div class="two">
-    <div class="card">
-      <span class="tag">01 · Impact mapping at the center</span>
-      <h3>It does not stop at an alert</h3>
-      <p>Knowing that a law changed is different from the company actually changing. In practice the effort went into finding which policy clause, form field, and HRIS setting to touch, not into reading the amendment. So <strong>company-specific impact mapping</strong> is the core of the product.</p>
-    </div>
-    <div class="card">
-      <span class="tag">02 · Three responsibilities</span>
-      <h3>AI drafts, rules supply the basis, people decide</h3>
-      <p>The wording of work rules becomes an employee's working conditions. So AI output is <strong>stored only as a draft</strong>, and the practitioner and the approver confirm applicability and wording. The rule engine checks conditions and computes deadlines from reference values approved by a person. With AI off, the same flow still completes.</p>
-    </div>
-    <div class="card">
-      <span class="tag">03 · Legal safety line</span>
-      <h3>The system does not make final legal determinations</h3>
-      <p>Whether a revision is a disadvantageous change to work rules determines which procedure the company must follow. Such questions always stay <strong>"needs review"</strong> and go to an expert. There are five areas: disadvantageous change to work rules, justification of dismissal or discipline, employer status and collective bargaining, occupational safety violations, and the legality of automated hiring and evaluation decisions.</p>
-    </div>
-    <div class="card">
-      <span class="tag">04 · Keeping the basis</span>
-      <h3>The basis outlives the person in charge</h3>
-      <p>Who decided, when, on what basis, and which evidence confirmed fulfillment are kept together per case, so the next change and the next handover can start from that record.</p>
-    </div>
-  </div>
+  <ul class="plain" style="margin-top:26px">
+    <li><b>Impact mapping at the center</b>: In practice, the effort went into finding which policy clause, form field, and HR system setting to change, not into reading the amendment.</li>
+    <li><b>AI drafts only</b>: The wording of work rules becomes an employee's working conditions, so the practitioner confirms applicability and wording.</li>
+    <li><b>Legal judgment stays with people</b>: In five areas, such as a disadvantageous change to work rules or the justification of dismissal and discipline, the system does not conclude. It routes the question to an expert as "needs review".</li>
+    <li><b>The basis is kept</b>: Who decided what, when, and on what basis is kept per case, so the next change can start from that record even after the person in charge moves on.</li>
+  </ul>
 </section>
 
-<section id="eval" aria-labelledby="eval-title">
-  <h2 id="eval-title">Verification and scale</h2>
+<section id="build" aria-labelledby="build-title">
+  <h2 id="build-title">Inside the product, and in building it</h2>
+  <p class="sec-meta">04 · How I used AI</p>
+  <p><b>Inside the product</b>, AI is given only clause candidates, before-and-after comparisons, and draft wording. A rule engine checks conditions and computes deadlines from reference values approved by a person, and the server checks the AI's citations and numbers against the official statute text. Anything that cannot be confirmed in the source stays "unconfirmed".</p>
+  <p><b>In building it</b>, AI agents wrote the code. I decided what to build, the lines AI must not cross, and the approval criteria. The work was split across lead, core, and UI sessions; a model from a different provider than the one that wrote the code reviewed it read-only; and only changes that passed the required tests were merged. Core data structures and reference values for judgment cannot change without my approval record, and a change without one fails the automated checks. Each design decision is written down in its own document.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 912 452" role="img" aria-labelledby="topo-t topo-d">
+      <title id="topo-t">Session topology</title>
+      <desc id="topo-d">The human gives instructions and approvals to one lead session only. The lead session assigns work to a core session and a web UI session and asks Codex for a read-only review. Changes from the writing sessions are submitted to CI, and CI confirms the required tests before merge.</desc>
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="ah"/></marker></defs>
+
+      <rect class="n-human" x="266" y="4" width="280" height="64" rx="12"/>
+      <text class="t w" x="406" y="31" text-anchor="middle">Human · Builder</text>
+      <text class="w2" x="406" y="53" text-anchor="middle">Scope, approvals, reference values</text>
+
+      <line class="ln" x1="406" y1="68" x2="406" y2="117" marker-end="url(#ah)"/>
+      <text class="m" x="420" y="98">Instructions and approvals enter here only</text>
+
+      <rect class="n-ai" x="196" y="120" width="420" height="92" rx="12"/>
+      <text class="lb" x="216" y="144">ORCHESTRATOR</text>
+      <text class="t" x="216" y="169">Lead session <tspan class="m" dx="6">Claude Code</tspan></text>
+      <text x="216" y="194">Assigns work · requests review · collects results</text>
+
+      <line class="ln" x1="619" y1="166" x2="697" y2="166" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <text class="m" x="658" y="154" text-anchor="middle">request</text>
+      <text class="m" x="658" y="187" text-anchor="middle">findings</text>
+
+      <rect class="n-ai" x="700" y="120" width="212" height="92" rx="12"/>
+      <text class="lb" x="718" y="144">REVIEWER</text>
+      <text class="t" x="718" y="169">Codex <tspan class="m" dx="6">other provider</tspan></text>
+      <text x="718" y="194">Read-only, edits no code</text>
+
+      <line class="ln" x1="300" y1="215" x2="300" y2="257" marker-start="url(#ah)" marker-end="url(#ah)"/>
+      <text class="m" x="314" y="241">assign ↓ · report ↑</text>
+
+      <rect class="grp" x="0" y="260" width="590" height="188" rx="14"/>
+      <text class="lb" x="16" y="284">WRITERS <tspan class="m" dx="8">one writing session per area</tspan></text>
+
+      <rect class="n-ai" x="14" y="298" width="274" height="136" rx="12"/>
+      <text class="t" x="30" y="324">Core session</text>
+      <text class="m" x="30" y="345">Judgment rules and data</text>
+      <rect class="sub" x="30" y="358" width="242" height="62" rx="8"/>
+      <text x="44" y="383">2 subagents</text>
+      <text class="m" x="44" y="405">No overlap, core session merges</text>
+
+      <rect class="n-ai" x="302" y="298" width="274" height="136" rx="12"/>
+      <text class="t" x="318" y="324">Web UI session</text>
+      <text class="m" x="318" y="345">User interface</text>
+      <text x="318" y="383">Core area is read-only</text>
+      <text class="m" x="318" y="405">Reports only to the lead session</text>
+
+      <line class="ln" x1="590" y1="366" x2="663" y2="366" marker-end="url(#ah)"/>
+      <text class="m" x="627" y="354" text-anchor="middle">Submit</text>
+
+      <rect class="n-rule" x="666" y="298" width="246" height="136" rx="12"/>
+      <text class="lb" x="684" y="322">GATE</text>
+      <text class="t" x="684" y="347">CI <tspan class="m" dx="6">GitHub Actions</tspan></text>
+      <text x="684" y="383">Automated checks</text>
+      <text class="m" x="684" y="405">Checks required tests pre-merge</text>
+    </svg>
+  </figure>
+  <p class="legend"><span><i class="chip human">Human</i> decisions and approvals</span><span><i class="chip ai">AI</i> agent sessions</span><span><i class="chip rule">Rule</i> automated checks</span></p>
   <div class="tablewrap">
     <table>
-      <thead><tr><th scope="col">Measure</th><th scope="col">Value</th><th scope="col">What it means</th></tr></thead>
+      <thead><tr><th scope="col">Record</th><th scope="col">Scale</th><th scope="col">What it means</th></tr></thead>
       <tbody>
-        <tr><td class="k">Product code</td><td class="n">about 42,200 lines</td><td>Development volume. Core server (Python) about 25,400 lines, web UI (TypeScript) about 16,800 lines. The code was written by AI agents.</td></tr>
-        <tr><td class="k">Test code</td><td class="n">about 63,200 lines</td><td>Development volume. About 46,750 lines for the core server and 16,450 for the web UI.</td></tr>
-        <tr><td class="k">Automated tests</td><td class="n">4,718 passing</td><td>Checks that run before code is merged, across 8 jobs.</td></tr>
-        <tr><td class="k">CI runs</td><td class="n">491</td><td>Cumulative runs since Sep 7, 2026.</td></tr>
-        <tr><td class="k">End-to-end user flow tests</td><td class="n">29 passing</td><td>Browser tests from the inbox to the closing record.</td></tr>
-        <tr><td class="k">Forbidden-action tests</td><td class="n">12 types, 40 of 40 cases</td><td>All 40 defined forbidden-action test cases produced the expected refusal.</td></tr>
-        <tr><td class="k">Tenant isolation</td><td class="n">applied to 35 tables</td><td>A database isolation policy is applied to the 35 tables that hold tenant data.</td></tr>
-        <tr><td class="k">Server checks on AI output</td><td class="n">7</td><td>AI is allowed only four tasks. The server checks the output's format, input scope, citation of the official text, numbers and units, and more.</td></tr>
-        <tr><td class="k">Cross-reviews by another model</td><td class="n">279 records</td><td>Read-only reviews by an AI model from a different provider than the one that wrote the code.</td></tr>
+        <tr><td class="k">Automated tests</td><td class="n">4,718 passing</td><td>Tests that run every time before a change is merged.</td></tr>
+        <tr><td class="k">Cross-reviews by another model</td><td class="n">279</td><td>Read-only reviews by a model from a different provider than the one that wrote the code.</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="small">Figures are as of October 25, 2026, from the repository and CI records. Line counts and run counts show development volume; behavior was checked by the user-flow tests and the forbidden-action tests. The statute and amendment come from official sources; company facts, demo decisions, fulfillment records, and evidence are fictional.</p>
-  <div class="faq" style="margin-top:14px">
+  <h3>What the cross-review found</h3>
+  <p>In the first cross-review, the other model found that confirming a clause's impact and approving its wording shared a single status value. A practitioner who only confirmed the impact could have let AI-drafted wording enter an internal notice as if it were confirmed. In HR practice these are two different approvals, so I separated them and added a record of who confirmed the wording and when.</p>
+</section>
+
+<section id="eval" aria-labelledby="eval-title">
+  <h2 id="eval-title">One legal change, handled end to end</h2>
+  <p class="sec-meta">05 · How far it goes</p>
+  <p>Applying an amendment that extends leave for an employee whose spouse gives birth from 10 to 20 days to a fictional company, the PoC runs the whole flow: collecting the statute, finding affected clauses, revised wording, procedure, confirming fulfillment, and the closing record. <a href="index.html#demo">Watch the demo →</a></p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th scope="col">What was confirmed</th><th scope="col">Result</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Lines AI must not cross</td><td>All 40 test cases that deliberately attempt the 12 forbidden actions were refused</td></tr>
+        <tr><td class="k">End-to-end workflow</td><td>29 browser tests passing</td></tr>
+        <tr><td class="k">Tenant isolation</td><td>Database isolation enforced on every table that holds tenant data</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="faq">
     <details>
       <summary>The 12 forbidden-action tests</summary>
       <div class="a" style="max-width:none">
@@ -213,37 +267,7 @@
       </div>
     </details>
   </div>
-</section>
-
-<section id="stack" aria-labelledby="stack-title">
-  <h2 id="stack-title">Stack</h2>
-  <dl class="spec">
-    <dt>Core server</dt><dd><ul class="stack"><li>Python</li><li>FastAPI</li><li>PostgreSQL</li><li>Row Level Security</li><li>pytest</li></ul></dd>
-    <dt>Web UI</dt><dd><ul class="stack"><li>TypeScript</li><li>vitest</li><li>Playwright</li></ul></dd>
-    <dt>Judgment</dt><dd><ul class="stack"><li>Pure-function rule engine</li><li>YAML reference data (human-approved)</li></ul></dd>
-    <dt>AI</dt><dd><ul class="stack"><li>Anthropic Claude (in-product drafts)</li><li>7 server-side checks</li><li>Evaluation set and thresholds (designed)</li></ul></dd>
-    <dt>Collection</dt><dd><ul class="stack"><li>Official text from Korea's national law information service</li><li>Daily scheduled run</li></ul></dd>
-    <dt>Deploy and CI</dt><dd><ul class="stack"><li>Render</li><li>Docker</li><li>GitHub Actions</li></ul></dd>
-    <dt>How it was built</dt><dd><ul class="stack"><li>Claude Code (writing)</li><li>Codex (cross-review)</li><li>Decision records (ADR)</li></ul></dd>
-  </dl>
-</section>
-
-<section id="faq" aria-labelledby="faq-title">
-  <h2 id="faq-title">FAQ</h2>
-  <div class="faq">
-    <details>
-      <summary>Does the AI make legal judgments?</summary>
-      <div class="a"><p>No. AI produces drafts only: clause mapping, comparison, wording. The rule engine checks conditions and computes procedures. People confirm applicability and wording. In the five restricted areas the system routes the question to an expert.</p></div>
-    </details>
-    <details>
-      <summary>Why not paste the company policies into a general-purpose AI and ask?</summary>
-      <div class="a"><p>That is a real alternative. PeopleLaw builds in the parts around the answer: updating relationships when a source changes, separating what has not been confirmed, and handing the basis to the next person. I think the fair comparison is the total effort to keep the same level of review and record.</p></div>
-    </details>
-    <details>
-      <summary>You did not write the code yourself. How did you verify it?</summary>
-      <div class="a"><p>AI agents wrote the code. I decided what to build and what to approve. I checked development results with a defined set of automated tests, cross-review by an AI model from a different provider, and human approval. These checks do not guarantee quality beyond what they cover.</p></div>
-    </details>
-  </div>
+  <p class="small" style="margin-top:14px">Stack: Python, FastAPI, PostgreSQL · TypeScript · Anthropic Claude · Claude Code and Codex, GitHub Actions. The statute and amendment come from official sources; company facts, decisions, fulfillment records, and evidence on screen are fictional. The original Korean blueprint is on the <a href="../peoplelaw.html#blueprint">Korean page</a>.</p>
 </section>
 
 <div class="pager">

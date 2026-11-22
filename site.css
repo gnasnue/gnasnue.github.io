@@ -362,6 +362,132 @@ nav a.lang{font-weight:600;border-color:var(--line);margin-left:6px}
   nav a,nav a.lang{padding:5px 9px}
 }
 
+/* v1.4 (2026-11-20): 홈 분량을 줄이면서 더한 것
+   이름만 쓰는 머리말, 상자 없이 줄로 나누는 항목 목록, 번호를 붙이지 않는 구획 */
+.hero h1 small{font-size:.42em;font-weight:650;color:var(--muted);letter-spacing:0;margin-left:.6em;white-space:nowrap}
+.hero .lead + .lead{margin-top:14px}
+.hero .lead + .pillars{margin-top:26px}
+.nonum section > h2::before{content:none}
+.items{margin:0;padding:0;list-style:none}
+.items > li{margin:0;padding:26px 0;border-top:1px solid var(--line)}
+.items > li:first-child{border-top:0;padding-top:0}
+.items > li:last-child{padding-bottom:0}
+.items h3{margin:0 0 4px;font-size:var(--fs-h3);line-height:1.4}
+.items .meta,.sec-meta{color:var(--muted);font-size:var(--fs-small);margin:0 0 12px}
+.items p{margin:0 0 10px;max-width:var(--measure-text)}
+.items .tech{color:var(--muted);font-size:var(--fs-small)}
+.items p:last-child{margin-bottom:0}
+.shot + p{margin-top:22px}
+.shot ~ p{max-width:var(--measure-text)}
+.golinks{margin:18px 0 0}
+.items a.go,.golinks a{font-weight:700;font-size:var(--fs-compact);color:var(--navy);text-decoration:none;border-bottom:2px solid var(--navy);padding-bottom:1px;margin-right:18px}
+
+/* v1.5 (2026-11-20): 항목의 상세를 '더보기'로 접는다 */
+.more{margin:14px 0 0}
+.more > summary{display:inline-flex;cursor:pointer;list-style:none;font-weight:700;font-size:var(--fs-small);color:var(--navy);padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.more > summary::-webkit-details-marker{display:none}
+.more > summary:hover{border-color:var(--navy)}
+.more > summary .o,.more[open] > summary .c{display:none}
+.more[open] > summary .o{display:inline}
+.more .metrics{margin:18px 0 0}
+.more dl.spec{margin:18px 0 0;padding:18px 0 0;border-top:1px solid var(--line);gap:10px 22px}
+.more dl.spec dd li:last-child{margin-bottom:0}
+
+/* v1.6 (2026-11-20): 글 너비 하나로 통일
+   글(문단, 목록, 설명 줄, 표 안 설명 칸)은 모든 쪽에서 680px(--measure-text)를 넘지 않는다.
+   그림, 영상, 표, 카드, 상자는 한 단(912px)을 그대로 쓰고, 그 안의 글은 상자 폭을 따른다. */
+section > p.small,section > p.legend,.sec-meta,.byline,.pillars dd,.tldr p,.items p,.items .meta{max-width:var(--measure-text)}
+
+/* v1.7 (2026-11-20): 글도 한 단 전체 폭을 쓴다
+   v1.2 ~ v1.6의 680px 글 폭을 거둔다. 제목, 글, 그림, 표, 카드의 오른쪽 끝이 모두 같은 줄(912px)에 선다. */
+:root{--measure-text:100%}
+
+/* v1.8 (2026-11-20): 꾸밈 걷어 내기
+   왼쪽 색 띠 상자, 주황 꼬리표, 구획 번호, 알약 목차, 숫자 카드, 흰 카드를 쓰지 않는다.
+   흰 상자는 그림, 영상, 표에만 남긴다. 나머지는 제목과 글, 줄로 나눈다. */
+.nonum .case-head h1 em,.hero h1 em{color:inherit}
+.nonum .toc{gap:6px 22px;margin-top:20px}
+.nonum .toc a{padding:0;border:0;border-radius:0;background:none;color:var(--muted);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:5px}
+.nonum .toc a:hover{color:var(--ink);text-decoration-color:var(--navy)}
+.case-head .lead + .lead{margin-top:14px}
+.case-head .sec-meta{margin:16px 0 0}
+.case-after .golinks{margin-top:4px}
+/* 상자 없는 소제목 + 문단 묶음 */
+.points{display:grid;grid-template-columns:1fr 1fr;gap:28px 44px;margin:0}
+.points h3{margin:0 0 8px;font-size:var(--fs-h4);line-height:1.45}
+.points p{margin:0}
+.points .meta{color:var(--muted);font-size:var(--fs-small);margin:0 0 8px}
+/* 기술 목록: 상자 대신 가운뎃점으로 이은 글 */
+.stack{display:block}
+.stack li{display:inline;border:0;border-radius:0;padding:0;background:none;font-size:inherit;font-weight:400;color:inherit}
+.stack li + li::before{content:" · ";color:var(--faint)}
+/* OverEdge 쪽은 사용자 판단으로 예전 모양(카드, 꼬리표, 숫자 카드)을 유지한다. 왼쪽 색 띠만 뺀다 */
+.tldr{border-left:0}
+@media (max-width:900px){
+  .points{grid-template-columns:1fr}
+}
+
+/* v1.9 (2026-11-20): 머리말 옆 사진 (OverEdge 최종 오디션) */
+.head-photo{display:grid;grid-template-columns:1fr 232px;gap:44px;align-items:start}
+.head-photo .toc{margin-top:22px}
+.head-photo + .metrics{margin-top:30px}
+.photo{margin:0}
+.photo img{width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--line)}
+.photo figcaption{padding:8px 2px 0;border:0;background:none;font-size:var(--fs-small);color:var(--muted);line-height:1.5}
+@media (max-width:900px){
+  .head-photo{grid-template-columns:1fr;gap:22px}
+  .photo{max-width:280px}
+}
+
+/* v2.0 (2026-11-21): 머리말 규칙 하나로
+   모든 쪽의 머리말은 같은 순서와 같은 글자를 쓴다.
+   제목(48px 800, 옆의 작은 이름표는 0.42배 회색) → 부제(24px 700, 색 강조 없음) → 소개 문단(17px, 굵은 글씨 없음)
+   → 정보 줄(14px 회색, 가운뎃점으로 구분) → 링크(15px 700 남색 밑줄) → 목차(14px 회색 글자 링크).
+   주황색 꼬리표와 제목 속 주황색은 쓰지 않는다. */
+.hero h1 small,.case-head h1 .pname small{font-size:.42em;font-weight:650;color:var(--muted);letter-spacing:0;margin-left:.6em;white-space:nowrap}
+.hero h1 em,.case-head h1 em{color:inherit}
+.hero h1 .pname{display:block;line-height:1.15;margin-bottom:.34em}
+.hero h1 .pdesc{display:block;font-size:var(--fs-sub);font-weight:700;line-height:1.38;letter-spacing:-.025em}
+.hero .lead a,.case-head .lead a{font-weight:650}
+.hero .lead strong,.case-head .lead strong{font-weight:400;color:inherit}
+.case-head .lead{margin:0}
+.case-head .lead + .lead{margin-top:14px}
+.case-head .sec-meta{margin:16px 0 0}
+.case-head .sec-meta a{color:inherit}
+.case-head .golinks{margin:20px 0 0}
+.case-head .toc{gap:6px 22px;margin-top:20px}
+.case-head .toc a{padding:0;border:0;border-radius:0;background:none;color:var(--muted);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:5px}
+
+/* v2.1 (2026-11-22): 수상 쪽 */
+.strategies{margin:0 0 26px;padding-left:1.3em}
+.strategies li{margin-bottom:10px}
+.slides{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);margin:0 0 14px}
+.slides figcaption{padding:10px 14px 12px}
+.slides img{width:100%;height:auto}
+.award-row{display:grid;grid-template-columns:1fr 232px;gap:44px;align-items:start}
+.award-row .sec-meta{margin:0 0 14px}
+.award-row .sec-meta b{color:var(--ink)}
+.award-row .tablewrap table{min-width:0}
+.award-row td.k{white-space:normal;width:34%}
+#moe .slides{margin-top:30px}
+.slides.zoomed img{filter:blur(7px)}
+.slides img{transition:filter .2s;pointer-events:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none}
+.award-row h3{margin:0 0 10px}
+.award-row h3 small{font-size:var(--fs-small);font-weight:400;color:var(--muted);margin-left:8px;letter-spacing:0}
+@media (max-width:900px){
+  .slides{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .slides{grid-template-columns:1fr}
+  .award-row{grid-template-columns:1fr;gap:18px}
+  .award-row .photo{max-width:220px}
+}
+
+/* v2.2 (2026-11-22): 피플로 스토리 구성 */
+ul.plain{margin:0 0 16px;padding-left:1.15em}
+ul.plain li{margin-bottom:10px}
+section > .sec-meta{margin:-4px 0 18px}
+
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @page{size:A4;margin:14mm 13mm}
 @media print{

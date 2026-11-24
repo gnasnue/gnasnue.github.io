@@ -79,7 +79,7 @@
 <div class="case-head">
   <h1><span class="pname">PeopleLaw</span><span class="pdesc">An HR compliance platform that finds what a company must change when a law changes, and keeps the basis for each decision</span></h1>
   <p class="sec-meta">Proof of concept (PoC) · Aug 2026 to present · Product definition, decision and approval criteria, AI agent development operations</p>
-  <p class="lead">A proof of concept in which I took a problem I met repeatedly over 12 years in HR, redefined it with what I learned in my MBA, and built it into a product with AI. I presented it at the final audition of an AI agent program run by KAIST's graduate school of AI and startup institute, after staged reviews.</p>
+  <p class="lead">A proof of concept in which I took a problem I met repeatedly in practice, redefined it with what I learned in my MBA, and built it into a product with AI. I presented it at the final audition of an AI agent program run by KAIST's graduate school of AI and startup institute, after four months of training and staged reviews.</p>
   <p class="golinks"><a href="index.html#demo">Watch the 72-second demo →</a><a href="../overedge.html">Program and review details (Korean) →</a></p>
   <ul class="toc" aria-label="On this page">
     <li><a href="#why">The problem in practice</a></li>
@@ -93,8 +93,8 @@
 <section id="why" aria-labelledby="why-title">
   <h2 id="why-title">One legal change never ends with one fix</h2>
   <p class="sec-meta">01 · The problem in practice</p>
-  <p>When Korea introduced the 52-hour workweek, I drafted and simulated the changes to our pay and bonus structure. The law changed in one line, but the way working hours were entered, the payroll process, the payroll system's calculation logic, and the labor-management negotiation all had to change with it.</p>
-  <p>This repeats whenever a statute or court ruling changes. Yet many companies have no one dedicated to HR compliance, so an HR practitioner handles it alongside other duties, and the record of what was affected and why ends up scattered across one person's files and memory. When that person moves on, the next change starts the same review from scratch.</p>
+  <p>When one external regulation changes, as with Korea's 52-hour workweek, the way working hours are entered, the payroll process, the payroll system's calculation logic, and the labor-management negotiation all have to change with it.</p>
+  <p>This repeats whenever a statute or court ruling changes. Yet many companies have no one dedicated to HR compliance, so an HR practitioner handles it alongside other duties, and the record of what was affected and why ends up scattered across one person's files and memory. When that person moves on, the next change starts the same review from scratch. PeopleLaw's core goal was to <b>map that scattered context inside the company</b>, so the work <b>continues without gaps on the same context and history</b> even when the person in charge or the users change.</p>
 </section>
 
 <section id="market" aria-labelledby="market-title">
@@ -159,7 +159,7 @@
   <h2 id="build-title">Inside the product, and in building it</h2>
   <p class="sec-meta">04 · How I used AI</p>
   <p><b>Inside the product</b>, AI is given only clause candidates, before-and-after comparisons, and draft wording. A rule engine checks conditions and computes deadlines from reference values approved by a person, and the server checks the AI's citations and numbers against the official statute text. Anything that cannot be confirmed in the source stays "unconfirmed".</p>
-  <p><b>In building it</b>, AI agents wrote the code. I decided what to build, the lines AI must not cross, and the approval criteria. The work was split across lead, core, and UI sessions; a model from a different provider than the one that wrote the code reviewed it read-only; and only changes that passed the required tests were merged. Core data structures and reference values for judgment cannot change without my approval record, and a change without one fails the automated checks. Each design decision is written down in its own document.</p>
+  <p><b>In building it</b>, I decided what to build, the lines AI must not cross, and the approval criteria. The work was split across lead, core, and UI sessions; a model from a different provider than the one that wrote the code reviewed it read-only; and only changes that passed the required tests were merged. Core data structures and reference values for judgment cannot change without my approval record, and a change without one fails the automated checks. Each design decision is written down in its own document.</p>
   <figure class="diagram">
     <svg viewBox="0 0 912 452" role="img" aria-labelledby="topo-t topo-d">
       <title id="topo-t">Session topology</title>

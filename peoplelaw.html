@@ -38,6 +38,11 @@
   .diagram{padding:20px 16px}
   .diagram svg{min-width:820px}
 }
+/* 움직이는 설계도. 인쇄할 때는 site.css가 영상을 숨기므로 정지 화면을 대신 쓴다 */
+.bp-motion{background:#08090C;border-color:#08090C}
+.bp-motion .bp-print{display:none}
+@media (max-width:900px){.bp-motion video{min-width:880px}}
+@media print{.bp-motion .bp-print{display:block}}
 </style>
 </head>
 <body>
@@ -93,8 +98,11 @@
   <h2 id="blueprint-title">인사 담당자의 판단을 제품의 원칙으로</h2>
   <p class="sec-meta">03 · 무엇을 만들기로 했나</p>
   <p class="intro">피플로는 법령 변경 한 건을 감지, 회사별 영향 매핑, 검토·결정, 실행·보존의 네 단계로 처리합니다. 설계의 기준은 기술이 아니라 인사 실무에서 겪은 위험이었습니다.</p>
-  <figure class="shot dark wide">
-    <a href="assets/blueprint.webp" aria-label="설계도를 큰 그림으로 열기"><img src="assets/blueprint.webp" alt="피플로 설계도. 01 감지: 공식 변화 수집(시스템). 02 코어: 회사별 영향 매핑, 법적 의무와 회사 사실 대조(규칙, AI, 사람). 03 검토·결정: 개정 문안과 절차(AI, 규칙, 사람). 04 실행·보존: 이행·증빙·이력(사람, 시스템). 아래에 AI는 초안, 규칙 엔진은 판단 근거, 사람과 전문가는 최종 결정이라는 세 책임과, 법률 판단은 자동 확정하지 않고 검토 필요로 전문가에게 연결한다는 법률 안전선이 있다" width="2647" height="1178" loading="lazy"></a>
+  <figure class="shot wide bp-motion">
+    <video autoplay muted loop playsinline preload="metadata" poster="assets/video/blueprint-map-poster.jpg" width="1830" height="716" role="img" aria-label="피플로 설계도. 법령·시행령, 입법예고, 판례, 행정해석, 회사 사실관계가 왼쪽에서 화살표를 따라 들어온다. 01 감지: 공식 변화 수집(시스템). 02 코어: 회사별 영향 매핑, 법적 의무와 회사 사실 대조(규칙, AI, 담당자). 03 검토·결정: 개정 문안과 절차(AI, 규칙, 담당자). 04 실행·보존: 이행·증빙·이력(담당자, 시스템). 아래에 AI는 초안, 규칙 엔진은 판단 근거, 담당자와 전문가는 최종 결정이라는 세 책임과, 법률 판단은 자동 확정하지 않고 담당자의 승인을 거쳐 확정하며 금지 영역은 전문가가 결론을 낸다는 법률 안전선이 있다">
+      <source src="assets/video/blueprint-map.mp4" type="video/mp4">
+    </video>
+    <img class="bp-print" src="assets/video/blueprint-map-poster.jpg" alt="피플로 설계도. 법령·시행령, 입법예고, 판례, 행정해석, 회사 사실관계가 왼쪽에서 화살표를 따라 들어온다. 01 감지: 공식 변화 수집(시스템). 02 코어: 회사별 영향 매핑, 법적 의무와 회사 사실 대조(규칙, AI, 담당자). 03 검토·결정: 개정 문안과 절차(AI, 규칙, 담당자). 04 실행·보존: 이행·증빙·이력(담당자, 시스템). 아래에 AI는 초안, 규칙 엔진은 판단 근거, 담당자와 전문가는 최종 결정이라는 세 책임과, 법률 판단은 자동 확정하지 않고 담당자의 승인을 거쳐 확정하며 금지 영역은 전문가가 결론을 낸다는 법률 안전선이 있다" width="1830" height="716">
   </figure>
   <ul class="plain" style="margin-top:26px">
     <li><b>영향 매핑을 중심에</b>: 실무에서 손이 가는 곳은 개정 내용을 읽는 일이 아니라, 고칠 규정 조항과 양식, 인사시스템 설정을 찾는 일이었습니다.</li>

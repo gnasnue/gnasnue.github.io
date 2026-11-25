@@ -86,7 +86,6 @@
     <li><a href="#market">The problem, seen again in the MBA</a></li>
     <li><a href="#blueprint">What I decided to build</a></li>
     <li><a href="#build">How I used AI</a></li>
-    <li><a href="#eval">How far it goes</a></li>
   </ul>
 </div>
 
@@ -223,53 +222,14 @@
       <tbody>
         <tr><td class="k">Automated tests</td><td class="n">4,718 passing</td><td>Tests that run every time before a change is merged.</td></tr>
         <tr><td class="k">Cross-reviews by another model</td><td class="n">279</td><td>Read-only reviews by a model from a different provider than the one that wrote the code.</td></tr>
+        <tr><td class="k">Lines AI must not cross</td><td class="n">all 40 refused</td><td>Tests that deliberately attempt the 12 forbidden actions.</td></tr>
       </tbody>
     </table>
   </div>
   <h3>What the cross-review found</h3>
   <p>In the first cross-review, the other model found that confirming a clause's impact and approving its wording shared a single status value. A practitioner who only confirmed the impact could have let AI-drafted wording enter an internal notice as if it were confirmed. In HR practice these are two different approvals, so I separated them and added a record of who confirmed the wording and when.</p>
-</section>
-
-<section id="eval" aria-labelledby="eval-title">
-  <h2 id="eval-title">One legal change, handled end to end</h2>
-  <p class="sec-meta">05 · How far it goes</p>
-  <p>Applying an amendment that extends leave for an employee whose spouse gives birth from 10 to 20 days to a fictional company, the PoC runs the whole flow: collecting the statute, finding affected clauses, revised wording, procedure, confirming fulfillment, and the closing record. <a href="index.html#demo">Watch the demo →</a></p>
-  <div class="tablewrap">
-    <table>
-      <thead><tr><th scope="col">What was confirmed</th><th scope="col">Result</th></tr></thead>
-      <tbody>
-        <tr><td class="k">Lines AI must not cross</td><td>All 40 test cases that deliberately attempt the 12 forbidden actions were refused</td></tr>
-        <tr><td class="k">End-to-end workflow</td><td>29 browser tests passing</td></tr>
-        <tr><td class="k">Tenant isolation</td><td>Database isolation enforced on every table that holds tenant data</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="faq">
-    <details>
-      <summary>The 12 forbidden-action tests</summary>
-      <div class="a" style="max-width:none">
-        <div class="tablewrap" style="margin:6px 0 0">
-          <table>
-            <thead><tr><th scope="col">ID</th><th scope="col">What it attempts</th><th scope="col">Expected result</th></tr></thead>
-            <tbody>
-              <tr><td class="n">C-01</td><td>Save a confirmed value in one of the five restricted areas without an expert conclusion</td><td>Refused. Value stays "needs review"</td></tr>
-              <tr><td class="n">C-02</td><td>Save "does not apply" without a basis and a re-review condition</td><td>Refused</td></tr>
-              <tr><td class="n">C-03</td><td>Cite text that is not an official source version as the basis</td><td>Refused</td></tr>
-              <tr><td class="n">C-04</td><td>Take actions beyond the allowed scope on a law that is not yet final</td><td>Refused</td></tr>
-              <tr><td class="n">C-05</td><td>Return a response without the expert-review notice</td><td>Exactly one notice in every response, including errors</td></tr>
-              <tr><td class="n">C-06</td><td>Edit or delete decision records, source versions, company-fact versions, or closing records</td><td>Refused. Records are append-only</td></tr>
-              <tr><td class="n">C-07</td><td>Use an AI draft as rule-engine input, or let the AI worker write to the decision ledger</td><td>Refused</td></tr>
-              <tr><td class="n">C-08</td><td>Let the rule engine confirm applicability by itself</td><td>Engine output is always "needs review". A conclusion exists only as a human decision</td></tr>
-              <tr><td class="n">C-09</td><td>Read or cross-write another tenant's data</td><td>Same response as a non-existent ID. Write refused</td></tr>
-              <tr><td class="n">C-10</td><td>Enter a real company name or upload a real document</td><td>Pseudonyms only. Upload refused by default</td></tr>
-              <tr><td class="n">C-11</td><td>Run an AI task that is not on the allow-list</td><td>Refused by a database constraint</td></tr>
-              <tr><td class="n">C-12</td><td>Change a core data structure without an approval record</td><td>Fails</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </details>
-  </div>
+  <h3>The result</h3>
+  <p>The PoC applies one legal amendment to a fictional company and runs the whole flow: collecting the statute, finding affected clauses, revised wording, procedure, confirming fulfillment, and the closing record. <a href="index.html#demo">Watch the demo →</a></p>
   <p class="small" style="margin-top:14px">Stack: Python, FastAPI, PostgreSQL · TypeScript · Anthropic Claude · Claude Code and Codex, GitHub Actions. The statute and amendment come from official sources; company facts, decisions, fulfillment records, and evidence on screen are fictional. The original Korean blueprint is on the <a href="../peoplelaw.html#blueprint">Korean page</a>.</p>
 </section>
 

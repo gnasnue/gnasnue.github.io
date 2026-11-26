@@ -41,6 +41,11 @@
   .bp-safe{margin-top:12px;border:1px solid #3A3F47;border-radius:10px;padding:12px 16px;text-align:center;font-size:var(--fs-small)}
   .bp-safe b{color:#FFB48A;display:block}
   @media (max-width:900px){.bp-grid,.bp-row{grid-template-columns:1fr}.bp-src{grid-template-columns:repeat(2,1fr)}.bp-src li.own{grid-column:1/-1}}
+  /* Animated blueprint. site.css hides video in print, so a still image stands in */
+  .bp-motion{background:#08090C;border-color:#08090C}
+  .bp-motion .bp-print{display:none}
+  @media (max-width:900px){.bp-motion video{min-width:880px}}
+  @media print{.bp-motion .bp-print{display:block}}
 </style>
 <style>
 /* Session topology diagram */
@@ -118,49 +123,12 @@
   <h2 id="blueprint-title">Turning an HR practitioner's judgment into product principles</h2>
   <p class="sec-meta">03 · What I decided to build</p>
   <p class="intro">PeopleLaw handles one legal change in four stages: detect, company-specific impact mapping, review and decide, execute and retain. The design was driven by the risks I had seen in HR practice, not by the technology.</p>
-  <div class="bp" role="img" aria-label="PeopleLaw blueprint. Changes come from five sources: statutes and decrees, legislative notices, court rulings, administrative interpretations, and company facts. They pass through four stages: 01 detect official changes (system), 02 core company-specific impact mapping (rules, AI, practitioner), 03 review and decide on wording and procedure (AI, rules, practitioner), 04 execute and retain (practitioner, system). Three responsibilities: AI drafts, the rule engine supplies the basis, the practitioner and experts make the final decision. Legal safety line: legal judgment is never confirmed automatically.">
-    <span class="bp-src-t">Changes from several directions</span>
-    <ul class="bp-src">
-      <li>Statutes and decrees</li>
-      <li>Legislative notices</li>
-      <li>Court rulings</li>
-      <li>Administrative interpretations</li>
-      <li class="own">Company facts<small>Entered in the profile</small></li>
-    </ul>
-    <span class="bp-arrow" aria-hidden="true">↓</span>
-    <div class="bp-grid">
-      <div class="bp-panel">
-        <span class="t">01 Detect</span>
-        <h3>Collect official changes</h3>
-        <ul><li>Daily collection of official statute versions</li><li>Machine comparison of text before and after</li><li>Promulgation number, effective date, and source text fixed</li></ul>
-        <ul class="chips"><li class="chip sys">System</li></ul>
-      </div>
-      <div class="bp-panel core">
-        <span class="t">02 Core</span>
-        <h3>Company-specific impact mapping</h3>
-        <ul><li>Legal duty checked against company facts<br><b style="color:#fff">→ match, mismatch, or fact unverified</b></li><li>Policy clauses, form fields, system settings</li><li>Candidates: machine search plus AI mapping drafts</li><li><b style="color:#fff">The practitioner decides applicability and what to fix</b></li></ul>
-        <ul class="chips"><li class="chip rule">Rules</li><li class="chip ai">AI</li><li class="chip human">Practitioner</li></ul>
-      </div>
-      <div class="bp-panel">
-        <span class="t">03 Review and decide</span>
-        <h3>Revised wording and procedure</h3>
-        <ul><li>AI draft of the revised wording</li><li>Machine check of the wording (no confirmation while warnings remain)</li><li>Candidate procedures and deadlines</li><li>Experts conclude on restricted areas</li></ul>
-        <ul class="chips"><li class="chip ai">AI</li><li class="chip rule">Rules</li><li class="chip human">Practitioner</li></ul>
-      </div>
-      <div class="bp-panel">
-        <span class="t">04 Execute and retain</span>
-        <h3>Fulfillment, evidence, history</h3>
-        <ul><li>Owner, deadline, fulfillment check</li><li>Evidence and a closing package</li><li>Decision history retained<br>→ reused for the next change</li></ul>
-        <ul class="chips"><li class="chip human">Practitioner</li><li class="chip sys">System</li></ul>
-      </div>
-    </div>
-    <div class="bp-row">
-      <div class="o"><b>AI · drafts</b>Legal basis is the official text. If AI is off, the flow still completes.</div>
-      <div><b>Rule engine · basis for judgment</b>Checks against reference data approved by a person.</div>
-      <div><b>Practitioner and experts · final decision</b>Confirm and record applicability, wording, and fulfillment.</div>
-    </div>
-    <div class="bp-safe"><b>Legal safety line</b>Never confirmed automatically. The practitioner approves, and experts conclude on restricted areas.</div>
-  </div>
+  <figure class="shot wide bp-motion">
+    <video autoplay muted loop playsinline preload="metadata" poster="../assets/video/blueprint-map-en-poster.jpg" width="1838" height="802" role="img" aria-label="PeopleLaw blueprint. Changes come from five sources: statutes and decrees, legislative notices, court rulings, administrative interpretations, and company facts. They pass through four stages: 01 detect official changes (system), 02 core company-specific impact mapping (rules, AI, practitioner), 03 review and decide on wording and procedure (AI, rules, practitioner), 04 execute and retain (practitioner, system). Three responsibilities: AI drafts, the rule engine supplies the basis, the practitioner and experts make the final decision. Legal safety line: legal judgment is never confirmed automatically.">
+      <source src="../assets/video/blueprint-map-en.mp4" type="video/mp4">
+    </video>
+    <img class="bp-print" src="../assets/video/blueprint-map-en-poster.jpg" alt="PeopleLaw blueprint. Changes come from five sources: statutes and decrees, legislative notices, court rulings, administrative interpretations, and company facts. They pass through four stages: 01 detect official changes (system), 02 core company-specific impact mapping (rules, AI, practitioner), 03 review and decide on wording and procedure (AI, rules, practitioner), 04 execute and retain (practitioner, system). Three responsibilities: AI drafts, the rule engine supplies the basis, the practitioner and experts make the final decision. Legal safety line: legal judgment is never confirmed automatically." width="1838" height="802">
+  </figure>
   <h3>What it gives the organization</h3>
   <ul class="plain">
     <li><b>Clear ownership of decisions.</b> Who decided what, and on what basis, stays in one place, so no one has to gather scattered files again for a report or an audit.</li>

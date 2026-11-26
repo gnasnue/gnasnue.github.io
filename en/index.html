@@ -99,20 +99,14 @@
           <dt>Design frame</dt><dd><ul>
             <li>It starts from the user's top 5 of the 34 <strong>CliftonStrengths</strong> themes.</li>
             <li>A four-phase career interview (opening, agreement, exploration, closing) follows the <strong>ICF core competencies</strong>. In the exploration phase, each turn picks one of four coaching moves.</li>
-            <li>After a direction is set, the user practices and reflects over 12 weeks.</li>
           </ul></dd>
           <dt>AI structure</dt><dd><ul>
             <li>Competency directions are <strong>matched by rules</strong>. AI writes only the explanation, fitted to the user's context.</li>
             <li>Action items go through four steps: generation, a five-part check (competency fit, link to strengths, ICF compliance, safety, format), rewrite, and fallback. Only items that pass the check are shown.</li>
-            <li>If a crisis signal is detected, coaching stops and the user is pointed to safety resources.</li>
           </ul></dd>
-          <dt>Validation</dt><dd><ul>
-            <li><strong>34 personas</strong> simulate coaching sessions. I reviewed the results and revised the prompts, repeatedly (a ralph loop).</li>
-            <li>The coach, the persona, and the judge run on <strong>different AI models</strong>, to reduce the bias of a model grading its own answers.</li>
-          </ul></dd>
-          <dt>User feedback</dt><dd><ul>
-            <li>User interviews, feedback from 11 users after launch, and 46 peer reviews from the class.</li>
-            <li>Feedback was collected in three rounds, and the items from the first two went into the product.</li>
+          <dt>Validation and user feedback</dt><dd><ul>
+            <li><strong>34 personas</strong> simulate coaching sessions. I reviewed the results and revised the prompts, repeatedly (a ralph loop). The coach, the persona, and the judge run on <strong>different AI models</strong>.</li>
+            <li>User interviews and feedback from 15 users, plus 46 peer reviews, went into the product.</li>
           </ul></dd>
           <dt>Stack</dt><dd><ul class="stack"><li>Next.js (App Router)</li><li>TypeScript</li><li>Supabase (Auth, PostgreSQL, RLS)</li><li>Claude API</li><li>Extended thinking</li><li>Prompt caching</li><li>Vercel</li></ul></dd>
         </dl>

@@ -76,19 +76,13 @@
       <details class="more">
         <summary><span class="c">Show more +</span><span class="o">Show less −</span></summary>
         <dl class="spec">
-          <dt>Customer research</dt><dd><ul>
-            <li>I interviewed parents of children under 8 and received 32 survey responses in July 2026.</li>
-            <li>I collected posts from parenting communities and analyzed what parents actually ask.</li>
+          <dt>Customer research and build</dt><dd><ul>
+            <li>Interviews with the target customers and analysis to validate the problem (parents of children under 8, and posts from parenting communities)</li>
+            <li>An <strong>AI daily parenting report</strong> based on each family's profile onboarding, clothing advice for today, and daycare note analysis</li>
           </ul></dd>
-          <dt>What was built</dt><dd><ul>
-            <li>Child profile onboarding, an <strong>AI parenting report</strong>, clothing advice for today, a condition forecast for the week</li>
-            <li>The parent logs how the day went in the evening, and the next day's advice takes it into account.</li>
-          </ul></dd>
-          <dt>Technically notable</dt><dd><ul>
-            <li>I built it alone <strong>with Claude Code</strong>, from design through deployment.</li>
-            <li><strong>Rules and AI are separated.</strong> Clothing advice is computed by rules from the weather and the profile, and only the summary report is written by Claude.</li>
-            <li><strong>Four public data feeds are combined in real time</strong>: the short-term forecast, pollen level, and UV index from the Korea Meteorological Administration, and air quality from AirKorea.</li>
-            <li>Each user's data is separated <strong>at the database level (RLS)</strong>. Sensitive content, such as the original text of daycare notes, is not stored on the server and stays on the device for 7 days.</li>
+          <dt>How it works</dt><dd><ul>
+            <li><strong>Rules and AI are separated.</strong> Recommendations are computed by rules from the weather and the profile, and the overall report is written by an LLM.</li>
+            <li><strong>Four public data feeds are combined in real time</strong>, and each user's data is separated <strong>at the database level (RLS)</strong>.</li>
           </ul></dd>
           <dt>Stack</dt><dd><ul class="stack"><li>Next.js 15 (App Router)</li><li>TypeScript</li><li>Supabase (Google OAuth, PostgreSQL, RLS)</li><li>Claude Sonnet</li><li>Tailwind CSS</li><li>shadcn/ui</li><li>Vercel</li></ul></dd>
         </dl>

@@ -76,19 +76,13 @@
       <details class="more">
         <summary><span class="c">더보기 +</span><span class="o">접기 −</span></summary>
         <dl class="spec">
-          <dt>고객 확인</dt><dd><ul>
-            <li>만 8세 미만 자녀를 둔 부모를 인터뷰했고, 2026년 7월에 설문으로 32명의 응답을 받았습니다.</li>
-            <li>육아 커뮤니티의 게시물을 모아 부모들이 실제로 무엇을 묻는지 분석했습니다.</li>
+          <dt>고객 확인 및 구현</dt><dd><ul>
+            <li>타깃 고객층 인터뷰와 문제 검증 분석(만 8세 미만 자녀 양육자 인터뷰, 육아 커뮤니티 게시글 분석)</li>
+            <li>개인별 프로필 온보딩을 바탕으로 한 <strong>AI 데일리 육아 리포트</strong>, 오늘의 옷차림 추천, 알림장 분석</li>
           </ul></dd>
-          <dt>구현한 것</dt><dd><ul>
-            <li>아이 프로필 온보딩, <strong>AI 육아 판단 리포트</strong>, 오늘의 옷차림 추천, 이번 주 컨디션 예보</li>
-            <li>저녁에 하루 결과를 기록하면 다음 날의 판단에 반영됩니다.</li>
-          </ul></dd>
-          <dt>기술적으로 의미 있는 점</dt><dd><ul>
-            <li>설계부터 배포까지 <strong>Claude Code로 혼자 구현</strong>했습니다.</li>
-            <li><strong>규칙과 AI를 나눴습니다.</strong> 옷차림 추천은 날씨와 프로필 규칙으로 계산하고, 종합 판단 리포트만 Claude가 씁니다.</li>
-            <li><strong>공공 데이터 네 가지를 실시간으로 결합</strong>합니다. 기상청 단기예보, 에어코리아 대기질, 기상청 꽃가루농도와 자외선지수입니다.</li>
-            <li>사용자별 데이터는 <strong>데이터베이스 수준(RLS)</strong>에서 분리했습니다. 알림장 원문처럼 민감한 내용은 서버에 두지 않고 기기에만 7일 보관합니다.</li>
+          <dt>구현 방식</dt><dd><ul>
+            <li><strong>규칙과 AI를 나눠</strong>, 추천은 날씨와 프로필 규칙으로 계산하고 종합 판단 리포트는 LLM이 작성합니다.</li>
+            <li><strong>공공데이터 네 가지를 실시간으로 결합</strong>하고, 사용자별 데이터는 <strong>데이터베이스 수준(RLS)</strong>에서 분리했습니다.</li>
           </ul></dd>
           <dt>기술</dt><dd><ul class="stack"><li>Next.js 15 (App Router)</li><li>TypeScript</li><li>Supabase (Google OAuth, PostgreSQL, RLS)</li><li>Claude Sonnet</li><li>Tailwind CSS</li><li>shadcn/ui</li><li>Vercel</li></ul></dd>
         </dl>

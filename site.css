@@ -500,3 +500,8 @@ section > .sec-meta{margin:-4px 0 18px}
   .shot,.note,.lane,.work,.card,.course,.tablewrap,.metric,.faq details{break-inside:avoid;box-shadow:none}
   a{text-decoration:none}
 }
+
+/* Peace-Collector 홍보 사진 두 장 */
+.peace-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px;align-items:start}
+.peace-photos img{display:block;height:auto}
+@media (max-width:600px){.peace-photos{grid-template-columns:1fr}}
